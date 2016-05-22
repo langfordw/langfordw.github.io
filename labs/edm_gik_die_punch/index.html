@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Will Makes Things</title>
+<link rel="stylesheet" href="css/site.css">
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<!-- <link rel="shortcut icon" href="/favicon.png" > -->
+</head>
+
+
+<body>
+<!-- 	<div class="container">
+		<a class="title" href="http://www.willlangford.me"><h1>&larr; Will Makes Things.</h1></a> -->
+
+		<p class="title">EDM Die-Punch for Lego-GIK</p>
+		<!-- <p class="subtitle"><a id='here' href='index.html'>vision</a></p>
+		<p class="subtitle"><a href='dev.html'>development</a></p> -->
+		<!-- <p class="subtitle"><a href='src.html'>source</a></p> -->
+
+		<p class="name"> <a href='http://www.willlangford.me/'>will langford</a><br /></p>
+		<p class="name"><a href="http://cba.mit.edu/" target="_blank">cba</a></p>
+		<div style="clear:both;"></div><br>
+
+		<p>I wanted to experiment with using the new <a href="http://fab.cba.mit.edu/content/tools/sodick_edm/index.html">Wire-EDM</a> for something it should be really good at: making custom dies and punches. I also needed to find an efficient way of mass producing a ton of tiny plastic parts for making <a href="http://fab.cba.mit.edu/classes/862.13/students/will/index.html">pressfit electronics.</a></p><br>
+
+		<div align="center">
+		<img src="http://farm4.staticflickr.com/3782/12178672575_141cceb18f_c.jpg" width="600">
+		</div><br>
+
+		<p>The current iteration is composed of three parts: the die, the punch, and the punch holder. Tolerances are very important on these kind of parts so I had to spend some serious time with the Wire-EDM to make sure I was getting what I had programmed. One feature I was very grateful for is the ability to measure holes with the machine itself. This makes it easy to rough cut the alignment holes, measure, skim cut, measure, cut again, measure, etc.. until the part is within tolerance. In this case, I undersized the alignment holes in the die by 0.001" and oversized the holes in the punch holder by 0.002". This allows the dowel pins to be pressfit into the die and for the punch holder to slide relatively smoothly on the alignment dowels.</p> <br>
+
+		<div align="center">
+		<img src="http://farm4.staticflickr.com/3795/12179073874_4d5ca0f6d0_c.jpg" width="500"><br><br>
+		<img src="http://farm4.staticflickr.com/3696/12179078174_84d0eb2e6b_c.jpg" height="300"> <img src="http://farm8.staticflickr.com/7326/12178671135_10c435ae4d_c.jpg" height="300"><br>
+		</div><br>
+
+		<p>The punch itself is undersized by 5% of the material thickness that I intend to stamp (and the die is 5% larger). Checking the final result under a microscope (with calipers set to the desired slot width) reveals that the parts are dimensionally very accurate.</p><br>
+
+		<div align="center">
+			<img src="images/edm_gik_die_punch_measure.png" width="400"><br>
+		</div>
+		<br>
+		<p>I'm very happy with how this first iteration turned out. There are still some issues that need to be resolved in order for it to work smoothly and not require taking apart after every use. For one, a taper should be cut on the backside of the die so that the part doesn't get stuck after getting cut out. The wire-EDM is perfectly capable of doing this, I just neglected it initially for simplicity.</p>
+		<br>
+		<p>Another future improvement will need to be a "stripper" plate to extract the punch from the remaining material after stamping.</p>
+
+		<div align="center"><span class="footnote"><br /> CBA 2014  </span> </div>
+</body>
+</html>

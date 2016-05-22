@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: dinRegular;
+  src: url('http://www.mit.edu/~calisch/fonts/DIN-Regular.ttf');
+}
+
+@font-face {
+  font-family: dinBlack;
+  src: url('http://www.mit.edu/~calisch/fonts/DIN-Black.ttf');
+}
+
+@font-face {
+  font-family: dinBold;
+  src: url('http://www.mit.edu/~calisch/fonts/DIN-Bold.ttf');
+}
+
+@font-face {
+  font-family: dinMedium;
+  src: url('http://www.mit.edu/~calisch/fonts/DIN-Medium.ttf');
+}
+
+body {background-color:#F7F7F7;}
+
+a:link {
+       text-decoration: none;
+       color:#666666;
+       margin-left: 0px;}
+a:visited {
+          text-decoration: none;
+          color:#666666;
+          margin-left: 0px;}
+a:active {
+         text-decoration: none;
+         color:#000000;
+         margin-left: 0px;}
+a:hover {
+        text-decoration: none;
+        color:#000000;
+        margin-left: 0px;}
+a#here{
+  color:#000000;
+}
+.link {
+      font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      color:#000000;
+      margin-top:0px;
+      margin-bottom:0px;
+      margin-left: 0px;}
+
+a.title{
+       font-family: dinRegular, Helvetica, Arial, Helvetica, sans-serif;
+       font-size: 24px;
+       margin-top:0px;
+       margin-bottom:0px;
+}
+.title {
+       font-family: dinRegular, Helvetica, Arial, Helvetica, sans-serif;
+       font-size: 24px;
+       margin-top:0px;
+       margin-bottom:0px;
+       margin-right:20px;
+       float:left;
+}
+.subtitle {
+          font-family: dinRegular, Arial, Helvetica, sans-serif;
+          font-size: 20px;
+          margin-top:5px;
+          margin-left:70px;
+          margin-bottom:0px;
+          float:left;
+}
+
+.name {
+          font-family: dinRegular, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          text-align:right;
+          margin-top:0px;
+          margin-bottom:0px;
+}
+.content_heading {
+                 font-family: dinMedium, Geneva, Arial, Helvetica, sans-serif;
+                 font-size: 20px;
+                 color:#000000;
+                 margin-left: 20px;
+                 margin-top:10px;
+                 margin-bottom:0px;}
+p {
+       font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+       font-size: 16px;
+       color:#222222;
+       margin-left: 40px;
+       margin-top:2px;
+       margin-bottom:2px;}
+
+h3 {
+  font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+  margin-left: 40px;
+}
+
+
+h2 {
+  font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+  margin-left: 40px;
+}
+
+p.bold{
+font-family: dinBold, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.sidebar{float:left;margin-right:20px;}
+
+.sidebar img{margin-top:5px;}
+
+.mainbar ul{
+  position: relative;
+  margin-left:265px;
+  margin-top:2px;}
+
+.container {
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px ;
+  margin-left: 30px ;
+  width: 1000px;
+  height: 600px;
+}
+
+.container img {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: -60;
+}
+ 
+.container li img {
+  position: absolute;
+  top: 0;
+  left: 1000px;
+  z-index: -50;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+nav {
+  width: 250px;
+  height: 550px;
+}
+
+nav h1 {
+  padding: 5px;
+  text-align: left;
+  font: 25px dinMedium, Geneva, Arial, Helvetica, sans-serif;
+  color:#000000;
+  margin-left: 0px;
+  margin-top:0px;
+  margin-bottom:2px;
+}
+
+nav ul {
+  width: 250px;
+  height: 460px;
+  background-color: rgba(247, 247, 247,.5);
+  list-style: none;
+  margin: 0px;
+  margin-left: 20px;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+}
+
+nav ul li{
+  font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color:#555555;
+  padding-left: 20px; 
+  padding-top: 2px;
+  padding-bottom: 3px;
+} 
+
+nav li a {
+  z-index: 1;
+  display: block;
+  padding-left: 0px;
+  width: 230px;
+  height: 18px;
+  color: #222222;
+  text-decoration: none;
+  font: 14px/30px dinRegular, Geneva, Arial, Helvetica, sans-serif;
+}
+ 
+nav li:nth-child(1) {
+  padding-top: 10px;
+}
+
+nav li a:hover{
+  color:#000000;
+}
+
+nav li a:hover + img {
+  left: 0px;
+}
+
+ul{
+   font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+   font-size: 16px;
+   color:#222222;
+   list-style-type: none;
+   padding-left: 40px;
+   padding-top: 0px;
+}
+
+ul li{
+   font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+   font-size: 16px;
+   color:#222222;
+   padding-left: 16px; 
+   padding-top: 2px;
+   padding-bottom: 3px;
+}
+
+.footnote {
+       font-family: dinMedium, Geneva, Arial, Helvetica, sans-serif;
+       font-size: 14px;
+       color:#666666;
+       margin-left: 40px;
+       margin-top:0px;}
+
+img{
+  border-style: none;
+  border-width: 1px;
+  border-color: #5C646B;
+}
+
+img.alpha{
+  border-style: none;
+  background-color:#F7F7F7;
+}
+
+/*this is adapted from stack overflow*/
+code{font-family:Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  background-color:#666666;
+  width:800px;
+  color:#eeeeee;
+}
+code.inline{
+  font-family:Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  background-color:#F7F7F7;
+  color:#000000;
+  }
+pre{padding:20px;font-family:Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  padding-top:0px;
+  background-color:#666666;
+  width:90%;
+  margin-left: 5%;
+  overflow:auto;
+}
+
+table.text{
+  padding-left: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+
+td{
+  font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color:#222222;
+  padding-left: 16px; 
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+caption{
+  font-family: dinRegular, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color:#222222;
+}
+}
+}

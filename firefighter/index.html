@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Will Makes Things</title>
+<link rel="stylesheet" href="../page_style.css">
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="/favicon.png" >
+</head>
+
+
+<body>
+	<div class="container">
+	<a class="title" href="../index.html"><h1>&#8592; Will Makes Things.</h1></a>
+    <p class="floatLeft"><img src="../img/cute_firefighter.png" style="vertical-align:middle" class="floatLeft" width="100"><h2 class="floatLeft">Firefighting Robots</h2></p>
+		
+	<p>The Tufts Robotics Club competed in the <a href="http://www.trincoll.edu/events/robot/">Trinity Firefighting Competition</a> for three years (2010 through 2012). I led the team each year as we developed mobile robots to navigate a maze, find a candle, and extinguish it.</p>
+
+	<img src="http://farm6.staticflickr.com/5105/5589937339_188f872503_z.jpg" width="400">
+
+	<p>We built a total of three robots over the three years: The Precipitating Pachyderm, JumboShrimp, and Jumbotron (all named after the Tufts University mascot: Jumbo, the elephant).</p>
+
+	<img src="http://farm6.staticflickr.com/5303/5592029001_bb9c67663e_z.jpg" width="600">
+
+	<p>The robots are equipped with most of the same sensors: a number of IR distance sensors, an IR photodiode to detect the flame, IR line sensors, and encoders on the wheels. The algorithm that the robots use looks something like this:</p>
+	
+	<p style="padding-left:1em">
+		<code>
+			follow left wall</br>
+			if there's a line on the floor </br>
+			&nbsp;&nbsp;align to line and check for flame</br>
+			&nbsp;&nbsp;if there's a flame</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;go and extinguish it</br>
+			&nbsp;&nbsp;else</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;turn around</br>
+		</code>
+	</p>
+
+	<p>Of course there's a lot more complexity in terms of executing each command and there are many cases that have to be accounted for (like switching walls to follow so the robot can search an island room).</p>
+
+	<p>The Trinity Firefighting Competition also features a written exam called the Olympiad Exam which teams take as a group. The exam tests problem solving ability specifically in the context of robotics. For example, you may be asked to optimize the delivery order of sushi-carrying robots given constraints on how many robots can fit in each room.</p>
+
+	<p>We turned out to be really good at this and got first place on the Olympiad Exam two years in a row (and tied for second place our first year).</p>
+
+    <img src="2012_trinity_firefighting_success.jpg" width="600">
+    
+    
+
+	</div>
+</body>
+</html>

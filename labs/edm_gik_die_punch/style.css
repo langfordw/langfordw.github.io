@@ -1,0 +1,88 @@
+body,h1,h2,h3,h4,h5,h6 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Droid Sans', sans-serif,'Helvetica', sans-serif, 'Droid Serif', serif;
+	background-color: #ebebeb;
+	/*background-color: #f1f1f1;*/
+}
+
+a {
+	text-decoration: none;
+}
+
+a.title {
+	text-decoration: none;
+}
+
+a.title:hover {
+	opacity:0.5;
+}
+
+a:link {
+	text-decoration: none;
+	color: #000000;	
+}
+
+a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+
+li {
+	display: inline;
+	list-style: none;
+}
+
+.alignLeft {
+	float: left;
+}
+
+.alignRight {
+	float: right;
+}
+
+.container {
+	width: 960px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 100px;
+}
+
+h1 {
+	font-size: 30pt;
+	text-indent: 29px;
+	margin-left: auto;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	line-height: 0.5em;
+	font-family: 'Droid Serif';
+}
+
+img{
+	display: inline-table;
+	margin-left: auto;
+	/*padding: 0px 15px;*/
+	padding: 0px 30px;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 1px solid #ebebeb;
+	margin: 0px;
+	/*-webkit-transition: border .1s ease-in-out;*/
+	-webkit-transition: opacity .1s ease-in-out;
+	opacity: .7;
+	width:215px;
+}
+
+img:hover {
+	opacity: 1;
+	width:215px;
+	/*border: 1px solid #000;*/
+	/*-webkit-transition: border .1s ease-in-out;*/
+	-webkit-transition: opacity .1s ease-in-out;
+}

@@ -1,0 +1,224 @@
+<html>
+<head>
+<title>Will Makes Things</title>
+<link rel="stylesheet" href="css/site.css">
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<!-- <link rel="shortcut icon" href="/favicon.png" > -->
+</head>
+
+
+<body>
+<!-- 	<div class="container">
+		<a class="title" href="http://www.willlangford.me"><h1>&larr; Will Makes Things.</h1></a> -->
+		<p class="title">PIT: Discrete Passives</p>
+
+		<!-- <br> -->
+		<p class="subtitle"><a id='here' href='index.html'>vision</a></p>
+		<p class="subtitle"><a href='dev.html'>development</a></p>
+		<!-- <p class="subtitle"><a href='src.html'>source</a></p> -->
+
+		<p class="name"> <a href='http://www.willlangford.me/'>will langford</a><br /></p>
+		<p class="name"><a href="http://cba.mit.edu/" target="_blank">cba</a></p>
+		<div style="clear:both;"></div><br>
+
+		<h2>Contents:</h2>
+		<ul>
+			<p>
+			<a href="#capacitor_design">Discrete Capacitor Design</a><br>
+			<a href="#inductor_design">Discrete Inductor Design</a><br>
+			<a href="#assembly">Discrete Assembly</a><br>
+			<a href="#testing_method">Experimental Testing Method</a><br>
+			<a href="#conclusion">Conclusion and Implications</a><br>
+			<a href="#references">References</a><br>
+			</p>
+		</ul>
+
+		<br>
+		<a name="capacitor_design">
+		<h2>Discrete Capacitor Design</h2>
+
+		<p>I first thought about what a capacitor made up of discrete parts might look like. I converged on an <b>interdigitated capacitor</b>.</p>
+
+		<p>This kind of capacitor makes good use of space and is easily implemented on the lego-gik lattice.</p>
+
+		<div align="center"><img src="images/discrete_capacitor_diagram.png" width="350"></div>
+
+		<p>It can also be easily tiled in any dimension (x, y, or z). Here, for example, is a simple tiling in the x and y directions:</p>
+
+		<div align="center"><img src="images/discrete_capacitor_array.png" width="500"></div>
+
+		<a name="back_of_the_envelope">
+		<h3>Back of the envelope calculations: What kind of capacitances can we expect?</h3>
+
+		<div align="center">
+			<img src="images/gik_dimensions3.png" width="250">
+		</div><br>
+
+		<p>The capacitance of a single unit capacitor can be found using the relationship: C = e*A/d. For a unit consisting of 6 conductive parts, this capacitance is roughly 10*e. Notice that because there is a relationship between L and d for the lego-gik, the capacitance per unit scales linearly with the characteristic spacing of the parts (d). However, because volume decreases with the cube of the characteristic spacing, there are large wins in efficiency when scaling down.</p>
+		<ul>
+			<p>To create a 1uF capacitor requires on the order of 10 million parts.</p>
+			<p>To create a 1nF capacitor requires on the order of 10 thousand parts.</p>
+			<p>To create a 1pF capacitor requires on the order of 10 parts.</p>
+		</ul>
+		<p>This suggests that I may strive to create a capaictance in the pF to nF range given that it would only be feasible to put together a discrete capacitor with order 10 parts by hand.</p>
+
+		<br>
+		<a name="inductor_design">
+		<h2>Discrete Inductor Design</h2>
+		<p>I spent quite some time trying to come up with an efficient way to make an inductor from the lego gik parts but ultimately settled on a really inefficient design.</p>
+
+		<div align="center"><img src="images/inductor_designs.jpg" width="600"></div><br>
+
+		<p>The final design I chose to pursue is simply a vertical coil for which it completes 1 turn every 4 vertical layers.</p>
+
+		<br>
+		<a name="assembly">
+		<h2>Assembling: "Skyscrapers for Electrons"</h2>
+		<p>The devices are small enough to be fairly easy to assembly by hand. It took on the order of an hour to assemble both capacitor and inductor.</p><br>
+		<div align="center"><img src="images/discrete_passives_penny.jpg" width="800"></div><br>
+
+		<p>I assembled the devices by hand (and with tweezers).</p>
+
+		<div align="center"><img src="images/discrete_capacitor_penny.jpg" width="350"></div><br>
+		
+
+		<br>
+		<a name="testing_method">
+		<h2>Experimental Testing Methods</h2>
+
+		<p>I used two different methods to test the devices:</p>
+
+		<h3>ATTiny Step Response</h3>
+		<div align="center"><img src="images/capacitor_testing.jpg" width="700"></div><br>
+
+		<p>I first used <a href="http://fab.cba.mit.edu/classes/MIT/863.09/people/mellis/input/index.html">David Mellis' Capmeter Board</a> to see if it could measure capacitances in the 1pF range.</p>
+
+		<div align="center"><img src="http://webpages.ursinus.edu/lriley/ref/circuits/img45.gif" width="350"><img src="images/rc_decay_measurement2_alpha2.png" width="550"></div><br>
+
+		<p>I found that I had to incrase the resistance of the RC circuit but otherwise the board worked perfectly to measure small capacitances.</p>
+
+		<p>I calibrated the board using a series of known capacitances from 1pF to 1000pF.</p>
+
+		<p>I was then able to generate a plot of the capacitance of the discrete capacitor vs. the number of vertical units:</p>
+
+		<div align="center"><img src="images/capacitance_per_height_annotated_alpha2.png" width="900"></div><br>
+
+		<p>This data is very much inline with my original <a href="#back_of_the_envelope">back-of-the-envelope estimates</a>. That is to say, I estimated 35 conductive parts would make capacitances on the order of 3pF and found that they actually made about 7pF of capacitance.</p>
+
+		<h3>Time Domain Analysis</h3>
+		<p>I wasn't content with just getting a value of the capacitance. I wanted to see phase lag and lead. This requires doing either a frequency domain analysis or a time-domain analysis. I chose to do a time domain analysis using a signal generator and oscilloscope.</p>
+
+		<p>I knew I wanted to minimized the impedances (both resistance and reactance) of the wires I'd use to connect the devices to the scope and signal generator. I figured BNC connectors would be a good way to do this. I was wrong.</p><br>
+
+		<div align="center"><img src="images/discrete_capacitor_bnc.jpg" width="400"></div><br>
+
+		<p>I realized that there was a ton of capacitive load while using the BNC connectors. When I did measurements with known capacitors, anything below a few microfarads was washed out by the capacitance of the sensing system.</p>
+
+		<p>I did some reading and it turns out that oscilloscopes generally have large capacitances in parallel with the input ports. This is designed to reduce noise caused by restistances (sqrt(4kTR)) but also causes problems when you want to measure very small capacitances at high frequencies.</p>
+
+		<p>The solution then, was to use o-scope probes. These are specifically designed to reduce the effect of this capacitive loading.</p><br>
+
+		<div align="center"><img src="http://www.hobbyprojects.com/oscilloscope_tutorial/images/oscilloscope_probe1.gif" width="600"></div><br>
+
+		<p>Having discovered this, I made some probe-boards to house the RC/RL components and ensure good connections to the probe tips.</p>
+
+		<p>Here is discrete capacitor demonstrating phase lag with respect to the input and the discrete inductor is demonstrating phase lead.</p>
+
+		<div align="center">
+		<table>
+		<tr>
+			<td><div align="center"><img src="images/discrete_capacitor_probing.jpg" width="350"></div></td>
+			<td><div align="center"><img src="images/DC500.png" width="500"></div></td>
+		</tr>
+		<br>
+		<tr>
+			<td><div align="center"><img src="images/discrete_inductor_probing.jpg" width="350"></div></td>
+			<td><div align="center"><img src="images/DI1010000.png" width="500"></div></td>
+		</tr>
+		</table>
+		</div><br>
+
+		<p>Capacitance and inductance can be calculated from the amplitude of the input and output waveform as well as the phase shift at a given frequency using the following equations. Here, Va1 in the sinusoidal input, Va2 is the voltage across the capacitor or inductor, and theta is the phase shift.</p>
+
+		<div align="center"><img src="images/z_equation.png" width="250"></div><br>
+		<div align="center"><img src="images/alpha_equation.png" width="250"></div>
+
+		<p>Then, for a capacitor, </p>
+
+		<div align="center"><img src="images/capacitor_equations.png" width="130"></div>
+
+		<p>and for an inductor, </p>
+
+		<div align="center"><img src="images/inductor_equations.png" width="110"></div><br>
+
+		<p>I made these calculations at a range of frequencies from 50kHz to 10MHz. The results are shown below:</p><br>
+
+		<P>The time-domain analysis was not nearly as sensitive as the step response test was for small capacitances. Its inability to measure below 20pF leads me to believe that this is a capactive loading issue resulting from the the measurement setup (e.g. probes).</P>
+
+		<div align="center"><img src="images/capacitor_values.png" width="800"></div><br>
+
+		<p>The time-domain analysis did much better with the inductors. At low frequencies the discrete inductor attenuated the entire signal but let some signal through at higher frequencies.</p>
+
+		<div align="center"><img src="images/inductor_values.png" width="800"></div><br>
+
+		<a name="conclusions"></a>
+		<h2>Conclusions and Implications of Scaling Down</h2>
+
+		<p>I've shown here that it is possible to discretely assemble functional passive circuit components. Furthermore, from the same set of parts it is possible to "program" phase-lag or phase-lead into the structure depending on the placement of the parts.</p><br>
+
+		<p>As I discussed in the the <a href="#back_of_the_envelope">back-of-the-envelope section</a>, there are signifcant benefits that come from scaling down the part size since capacitance scales with the characteristic length but volume scales with the cube of the characteristic length.</p><br>
+
+		<p>The inductor geometry presented here was far from ideal. It is possible that introducing a new part-type could solve the problem of spatial-density for the inductor.</p>
+
+
+
+<!-- 		<p>Use network analyzer (or pulse generator and o-scope). Attach capacitor to end of 50 ohm coax cable.</p>
+		<ul>
+			<p>Measure first resonance frequency: 1/sqrt(LC). (Seek to minimize L/C).</p>
+			<div align="center"><img src="images/capacitor_impedance.png" width="600"></div><br>
+			<p>Measure Equivalent Series Resistance.</p>
+			<div align="center"><img src="images/real_capacitor_schematic.png" width="500"></div><br>
+			<p>Measure Phase Shift</p>
+			<div align="center"><img src="http://www.teco.edu/~cdecker/digiclip/rc-circuit.jpg" width="400"></div><br>
+			<div align="center">
+			<p>
+			R = 4.7k ohm, C = 1uF
+			</p>
+			</div><br>
+			<div align="center"><img src="images/1uf_sine_phase_shift.png" width="800"></div><br>
+			<p>Measure Step Response</p>
+			<div align="center"><img src="http://www.emcesd.com/initrise.gif" width="500"></div><br>
+			<div align="center"><img src="images/1uf_square_step_response.png" width="800"></div><br>
+		</ul> -->
+
+		
+		
+		
+		
+
+		
+		<!-- <div align="center"><img src="http://www.emcesd.com/rcbnc2.jpg" width="400"></div><br> -->
+
+
+		
+		
+		<!-- <div align="center"><img src="images/assembling_1.jpg" width="400"></div> -->
+
+		<br>
+		<a name="references">
+		<h2>References:</h2>
+		<ul>
+			<li><p><a href="http://cp.literature.agilent.com/litweb/pdf/5989-8912EN.pdf">Agilent - Design of an interdigitated capacitor</a></p></li>
+			<li><p><a href="http://www.emcesd.com/tt020100.htm">Measuring ESR and parasitic inductance of a capacitor</a></p></li>
+			<li><p><a href="http://ieeeb.okstate.edu/lecturenotes/EET-4654%20Microwaves/Lecture%2012%20%20%20The%20Hidden%20Schematic.pdf">Non-ideal characteristics of real passive components</a></p></li>
+			<li><p><a href="http://ds.murata.co.jp/software/simsurfing/en-us/index.html">Murata SimSurf</a></p></li>
+			<li><p><a href="http://www.hobbyprojects.com/oscilloscope_tutorial/oscilloscope_probes.html">Probe Tip Tips</a></p></li>
+			<li><p><a href="http://download.tek.com/secure/75W_28152_0_MR_Letter.pdf?nvb=20130520072921&nva=20130520082921&token=0190ddab9c4ea20cc1915">Measuring Capacitance and Inductance with O-Scope</a> </p> </li>
+		</ul>
+
+
+	</div>
+	<div align="center"><span class="footnote"><br /> CBA 2013  </span> </div>
+</body>
+</html>
