@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Image Dimension Extractor</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="files/font-awesome.css">
+    <script type="text/javascript" src="files/jquery-2.js"></script>
+    <script type="text/javascript" src="files/jquery.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script src="jscolor.min.js"></script>
+
+
+    <!-- 
+      TO DO:
+        - dual units would be nice (display unit is configurable)
+        - add export!
+        - ability to modify endpoints of dimension line by clicking and dragging
+     -->
+
+    <style>
+        body {
+            padding-top: 10px;
+            padding-bottom: 30px;
+            margin-left:10%;
+            margin-right:10%;
+        }
+
+        svg {
+            border: 0px solid black;
+            display: block;
+            margin-left: 0%;
+            margin-right: 0%;
+
+        }
+
+        div.controls {
+            text-align: center;
+        }
+
+        div.controls i {
+            margin: 3px;
+        }
+
+        div.controls p {
+
+        }
+
+        div.controls-zoom, div.controls-pan {
+            display: inline-block;
+        }
+
+        div.controls-zoom {
+            margin-left: 0px;
+        }
+
+        div.svg-container {
+          display: inline-block;
+          position: relative;
+          width: 80%;
+          padding-bottom: 100%; 
+          vertical-align: middle; 
+          overflow: hidden;
+        }
+
+        div.controller {
+          display: inline-block;
+          position: absolute;
+          width: 15%;
+          padding-left:1%;
+        }
+
+    </style>
+
+    
+
+    <!-- // <script type="text/javascript" src="/home/daniel/dev/jquery-svg-pan-zoom/compiled/jquery.svg.pan.zoom.js"></script> -->
+
+    <script>
+        var example1; //globals so we can manipulate them in the debugger
+        $(function() {
+            "use strict";
+            var examples = $("svg").svgPanZoom();
+            examples.maxZoom = 30;
+            //examples.events.drag = false;
+
+            var callback= function(example) {
+                return function(event) {
+                    if ($(event.target).hasClass("fa-arrow-up"))
+                        example.panUp()
+                    if ($(event.target).hasClass("fa-arrow-down"))
+                        example.panDown()
+                    if ($(event.target).hasClass("fa-arrow-left"))
+                        example.panLeft()
+                    if ($(event.target).hasClass("fa-arrow-right"))
+                        example.panRight()
+                    if ($(event.target).hasClass("fa-plus"))
+                        example.zoomIn()
+                    if ($(event.target).hasClass("fa-minus"))
+                        example.zoomOut()
+                    if ($(event.target).hasClass("fa-refresh"))
+                        example.reset()
+                }
+            };
+
+            example1= examples[0]
+
+            $("div#example1 i").click(callback(example1));
+        });
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">Image Dimension Extractor</a>
+        </div>
+        <!-- <ul class="nav navbar-nav"> -->
+          <!-- <li class="active"><a href="#">Home</a></li> -->
+          <!-- li><input class="btn btn-default" type="button" value="Input" vertical-align:"middle"></li>
+          <li><input class="form-control" type="text" placeholder="Readonly input here…" readonly></li>
+          <li><a href="#">Page 3</a></li> -->
+        <!-- </ul> -->
+    </div>
+</nav>
+<div class="svg-container">
+    <svg id="thissvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 1000">
+    <!-- <g id="rotator" transform="rotate(0)">  can use this to rotate the whole svg element-->
+
+    <title>Extract dimensions from images</title>
+    <style>
+        * { vector-effect:non-scaling-stroke;}
+        circle { fill:none; stroke:orange; stroke-width:2px }
+        line   { stroke-linecap:round; fill-opacity:50%;  }
+    </style>
+    <image  x="0" y="0" width="1000" height="666" xlink:href="transistor_gik02.jpg" id="img"/>
+    <circle cx="0" cy="0" r="10" visibility="hidden" id="dot"/>
+    <line x1="0" y1="0" x2="0" y2="0" stroke-width="4" stroke="red"/>
+    <text id="dim" x="0" y="0" fnt-family="Verdana" text-anchor="middle" font-size="20" fill="red" transform=""></text>
+    
+    
+    <script>
+        var imageWidth = 500;
+        var drawing = false;
+        var start = {x:0, y:0}
+        var end = {x:0, y:0}
+        var enable_measure = false;
+        var measurement_scale = 1.0;
+        var measurement_unit = "px";
+        var len = 0;
+        var angle = 0;
+
+        SVGRoot = document.getElementsByTagName("svg")[0];
+
+        var svg  = document.documentElement,
+            pt   = SVGRoot.createSVGPoint(),
+            dot  = document.querySelector('#dot'),
+            line = document.querySelector('line'),
+            dim = document.querySelector('#dim'),
+            image = document.querySelector('#img'),
+            rotation = document.querySelector("#rotator");
+
+        svg.addEventListener('mousemove',function(evt){
+          if (enable_measure) {
+          var loc = cursorPoint(evt);
+            dot.setAttribute('cx',loc.x);
+            dot.setAttribute('cy',loc.y);
+            if (drawing) {
+              line.setAttribute('x2',loc.x);
+              line.setAttribute('y2',loc.y);
+              var mid_x = (loc.x-start.x)/2.+start.x;
+              var mid_y = (loc.y-start.y)/2.+start.y;
+              angle = Math.atan2(loc.y-start.y,loc.x-start.x)*180/3.1415926;
+              dim.setAttribute('x',mid_x);
+              dim.setAttribute('y',mid_y-10.);
+              len = dist(start,loc);
+              dim.textContent = round(len/measurement_scale,4) + " " + measurement_unit;
+              dim.setAttribute('transform',"rotate("+angle+","+mid_x+","+mid_y+")");
+              document.getElementById("measurement").innerHTML = round(len/measurement_scale,4) + " " + measurement_unit;
+            }
+          }
+        },false);
+
+        svg.addEventListener("keydown", function(evt) {
+          if (evt.shiftKey) {
+            // console.log("shift");
+            console.log(example1.getZoom());
+            if (drawing) {
+              // figure out how to constrain the cursor to only horizontal or vertical
+            }
+          }
+        })
+
+        svg.addEventListener('mousedown', function(evt) {
+          if (enable_measure) {
+          if (evt.which==3) {
+            var loc = cursorPoint(evt);
+            console.log("loc.x = " + loc.x + "  loc.y = " + loc.y);
+            if (drawing == false) {
+              start = loc; 
+              console.log(start);
+              line.setAttribute('x1',loc.x);
+              line.setAttribute('y1',loc.y);
+              drawing = true;
+            }
+            else { 
+              drawing = false;
+              end = loc;
+              line.setAttribute('x2',loc.x);
+              line.setAttribute('y2',loc.y);
+              enable_measure = false;
+              dot.setAttribute('visibility','hidden');
+              //rotation.setAttribute('transform',"rotate("+(-angle)+")");
+            }
+          }
+        }
+        })
+
+        svg.addEventListener('oncontextmenu', function(evt) {
+          return false;
+        })
+
+        function dist(s,e) {
+          return Math.sqrt((e.x-s.x)*(e.x-s.x) + (e.y-s.y)*(e.y-s.y));
+        }
+
+        // Get point in global SVG space
+        function cursorPoint(evt){
+          pt.x = evt.clientX; pt.y = evt.clientY;
+          return pt.matrixTransform(SVGRoot.getScreenCTM().inverse());
+        }
+
+        function wheelValue(evt) {
+            sw = evt.detail;
+            console.log(sw);
+            return sw;
+        }
+
+        function RightMouseDown() { return false; }
+
+        function round(value, decimals) {
+          return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+        }
+
+        // function enableMeasurement() {
+        //   console.log("measure");
+        //   enable_measure = true;
+        // }
+
+        // function setScale() {
+        //   var pixel_length = parseFloat(document.getElementById("measurement").innerHTML);
+        //   var real_string = document.getElementById("real_value").value;
+        //   console.log("pixel length: " + pixel_length + "  real length: " + real_string);
+        //   var real_length = parseFloat(real_string);//real_string.match(/(\d+)/g);
+        //   var units = real_string.split(/[0-9]+/g).pop();
+        //   console.log("length: " + real_length);
+        //   console.log("units: " + units);
+        //   var scale = round(pixel_length / real_length,3);
+        //   document.getElementById("scale").innerHTML = scale + " px / " + units;
+        //   measurement_unit = units;
+        //   measurement_scale = pixel_length / real_length;
+        // }
+
+        function importImage(evt) {
+          var selectedImage = evt.target.files[0];
+          console.log(selectedImage);
+          // var image_name = document.getElementById("importbtn").value;
+          // var file_reader = new FileReader();
+          // file_reader.readAsDataURL(image_name);
+          // image.setAttribute('xlink:href',image_name);
+          // console.log(image_name);
+        }
+
+        function updateScale(scale, units) {
+            measurement_unit = units;
+            measurement_scale = scale;
+            document.getElementById("scale").innerHTML = scale + " px / " + units;
+            dim.textContent = round(len/measurement_scale,4) + " " + measurement_unit;
+            document.getElementById("measurement").innerHTML = round(len/measurement_scale,4) + " " + measurement_unit;
+        }
+
+        function setFontSize(size) {
+          dim.setAttribute('font-size',size);
+        }
+
+        function setLineWeight(size) {
+          line.setAttribute('stroke-width',size);
+        }
+
+        function changeColor(color) {
+          line.setAttribute('stroke',color);
+          dim.setAttribute('fill',color);
+        }
+
+
+
+    </script>
+
+    <script>
+      svg.oncontextmenu=function() {
+        return false;
+      }
+
+    </script>
+
+<!-- </g> -->
+</svg>
+</div>
+
+<div class="controller">
+  <h4>Import:</h4>
+  <input class="btn" type="file" id="importbtn">
+  <div align=center><p>or</p></div>
+  <input class="btn btn-block" type="button" id="digicambtn" value="From Digicam">
+
+  <hr>
+  <h4>Measure:</h4>
+  <input class="btn btn-block" type="button" id="measurebtn" value="Measure"><br>
+  <pre style="margin-bottom:20px" id="measurement">0 px</pre>
+  <h5>Font Size:  <input class="btn btn-default inline" type="button" id="textsizeup" value="+"><input class="btn btn-default" type="button" id="textsizedown" value="-"><input class="btn btn-default" type="button" id="textsizereset" value="reset"></h5>
+  <h5>Line Weight:  <input class="btn btn-default inline" type="button" id="lineweightup" value="+"><input class="btn btn-default" type="button" id="lineweightdown" value="-"><input class="btn btn-default" type="button" id="lineweightreset" value="reset"></h5>
+  <h5>Color: <button id="colorswatch"
+    class="jscolor {value:'ff0000', valueElement:null, onFineChange:'updateColor(this)'} btn btn-default"
+    style="width:40px; height:25px;"></h5>
+  <hr>
+  <h4>Set Scale:</h4>
+  <input class="form-control" type="text" style="width:100%; display:inline-block" id="real_value" placeholder="Enter Actual Length">
+  <!-- <button style="width:30%" class="btn dropdown-toggle" type="button" id="units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">mm <span class="caret"></span> -->
+  </button><br>
+  <div align=center><p>or</p></div>
+  
+  <!-- <div class="dropdown">
+    <button class="btn btn-block dropdown-toggle" type="button" id="mag_dropdown" data-toggle="dropdown">Choose Magnification
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="scale">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">0.65x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">0.8x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1.0x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1.5x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2.0x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2.5x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">3.2x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">4.0x</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">5.0x</a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+    </ul>
+  </div><br> -->
+
+
+  <select id="drop" class="selectpicker" data-width="100%">
+    <option value="" disabled selected>Choose Magnification</option>
+    <option value=62.941>0.65x</option>
+    <option value=123>0.8x</option>
+    <option value=123>1.0x</option>
+    <option value=123>1.5x</option>
+    <option value=123>2.0x</option>
+    <option value=123>2.5x</option>
+    <option value=123>3.2x</option>
+    <option value=123>4.0x</option>
+    <option value=237.15>5.0x</option>
+  </select><br><br>
+  <div style="width:100%">
+  <input class="btn btn-default" style="width:50%" type="button" value="Set Scale" id="scalebtn"><input class="btn btn-default" style="width:50%" type="button" value="Reset" id="resetscalebtn">
+  </div>
+  <div style="width:40% inline-block">
+  
+  </div><br>
+  <pre id="scale">1.00 px / px</pre>
+  <input class="btn btn-block" type="button" id="exportbtn" value="Generate SVG"><br>
+  <a class="btn btn-block" download="ide_export.svg" id="export_link">Download SVG</a>
+  
+  
+</div>
+<div style="display:block">
+<img id="test">
+</div>
+
+<script type="text/javascript">
+  var which_scale = "none";
+  var units = "px";
+  var scale = 1.00;
+  var fontSize = 20;
+  var lineWeight = 4;
+
+  document.getElementById("real_value").onchange = function() {
+    which_scale = "length";
+  }
+
+  document.getElementById("importbtn").onchange = function(evt) {
+          var selectedImage = evt.target.files[0];
+          var file_reader = new FileReader();
+          var imgtag = document.getElementById("img");
+          imgtag.title = selectedImage.name;
+
+          file_reader.onload = function(event) {
+            imgtag.setAttribute('xlink:href',event.target.result);
+          }
+
+          file_reader.readAsDataURL(selectedImage);
+          console.log(selectedImage);
+        }
+
+  document.getElementById("digicambtn").onclick = function(evt) {
+          var imgtag = document.getElementById("img");
+          imgtag.setAttribute('xlink:href','http://localhost:5513/preview.jpg');
+        }
+
+  document.getElementById("measurebtn").onclick = function() {
+    console.log("measure");
+    enable_measure = true;
+    dot.setAttribute('visibility','visible');
+  }
+
+  document.getElementById("scalebtn").onclick = function() {
+    if (which_scale == "length") {
+      var pixel_length = parseFloat(document.getElementById("measurement").innerHTML)*scale;
+      var real_string = document.getElementById("real_value").value;
+      console.log("pixel length: " + pixel_length + "  real length: " + real_string);
+      var real_length = parseFloat(real_string);//real_string.match(/(\d+)/g);
+      units = real_string.split(/[0-9]+/g).pop();
+      console.log("length: " + real_length);
+      console.log("units: " + units);
+      scale = round(pixel_length / real_length,3);
+      updateScale(scale,units);
+    } else if (which_scale == "mag") {
+      scale = $(".selectpicker").val();
+      units = "mm";
+      updateScale(scale,units);
+    } else {
+      console.log("error: no magnification chosen");
+    }
+    
+  }
+
+  document.getElementById("textsizeup").onclick = function() {
+    fontSize = fontSize * 1.2;
+    setFontSize(fontSize);
+  }
+
+  document.getElementById("textsizedown").onclick = function() {
+    fontSize = fontSize * 0.8;
+    setFontSize(fontSize);
+  }
+
+  document.getElementById("textsizereset").onclick = function() {
+    fontSize = 20;
+    setFontSize(fontSize);
+  }
+
+  document.getElementById("lineweightup").onclick = function() {
+    lineWeight = lineWeight * 1.2;
+    setLineWeight(lineWeight);
+  }
+
+  document.getElementById("lineweightdown").onclick = function() {
+    lineWeight = lineWeight * 0.8;
+    setLineWeight(lineWeight);
+  }
+
+  document.getElementById("lineweightreset").onclick = function() {
+    lineWeight = 4;
+    setLineWeight(lineWeight);
+  }
+
+  document.getElementById("resetscalebtn").onclick = function() {
+    scale = 1.00;
+    units = "px"
+    document.getElementById("scale").innerHTML = scale + " px / " + units;
+    measurement_unit = units;
+    measurement_scale = 1;
+  }
+
+  document.getElementById("exportbtn").onclick = function() {
+    exportSVG();
+    // window.open()
+    // $(#export_link).trigger("click");
+  }
+
+  function updateColor(jscolor) {
+    changeColor("#"+jscolor);
+  }
+
+  // document.getElementById("mag_dropdown").onchange = function(evt) {
+  //   console.log("dropdown changed");
+  // }
+  $('.selectpicker').selectpicker({
+  style: 'btn-block',
+  size: 3
+});
+
+  $(".selectpicker").change( function(){
+    which_scale = "mag";
+    console.log(this.value);
+  });
+
+  function exportSVG() {
+    var mySVG = document.getElementById("thissvg");
+    var serializer = new XMLSerializer();
+    var source = serializer.serializeToString(mySVG);
+
+    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+        source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+    }
+
+    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+    var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+
+    document.getElementById("export_link").href = url;
+    // window.open(url)
+  // var mySVG = document.getElementById("thissvg");
+  // console.log(mySVG);
+  // var loader = new Image;
+  // var can = document.createElement('canvas');
+  // var ctx = can.getContext('2d');
+  // var tgtImage = document.getElementById("img");
+
+  // loader.width = can.width;
+  // loader.height = can.height;
+  // loader.onload = function() {
+  //   ctx.drawImage(loader,0,0,loader.width, loader.height);
+  //   tgtImage.src = can.toDataURL();
+  //   console.log(can.toDataURL());
+  // };
+
+  // var svgAsXML = (new XMLSerializer).serializeToString(mySVG);
+  // console.log(svgAsXML);
+  // loader.src = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
+  // document.getElementById("export_link").setAttribute('href',loader.src);
+
+}
+
+
+</script>
+
+</body>
+</html>
