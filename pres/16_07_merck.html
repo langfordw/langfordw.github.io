@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Electronic Digital Materials</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+<!-- 		<span id="usernote" class="user-notes" style="display:block">
+		"o" for overview, "f" for fullscreen, left and right arrows to navigate.
+		</span> -->
+			<div class="slides">
+				<section class="fit" data-background-image="images/merck_title.png"></section>
+				<section class="fit" data-background-image="images/14.05.NC_brick.png"></section>
+				<section class="fit" data-background-image="images/merck_overview.png"></section>
+				<section class="fit" data-background-image="images/gik_parts.png"></section>
+				<section class="fit" data-background-image="images/gik_circuits.png"><a href="3" class="navigate-next"><h1 style="color:rgba(0,0,0,0);">video</h1></a></section>
+				<section id="blink" data-background-video="video/13.11.blink.mp4" type="video/mp4" data-background-color="#FFF">
+				</section>
+				<section class="fit" data-background-image="images/passives.png"></section>
+				<section class="fit" data-background-image="images/joints.png"></section>
+
+				<section class="fit" data-background-image="images/assembler_overview.png"></section>
+				<section data-background-video="video/dual_stapler_cut2_small.mp4" type="video/mp4" data-background-color="#000">
+				</section>
+				<section class="fit" data-background-image="images/assembly_precision.png"></section>
+				<section class="fit" data-background-image="images/scaling.png"></section>
+				<section class="fit" data-background-image="images/functional_parts.png"></section>
+				<section class="fit" data-background-image="images/assembled_assembler.png"></section>
+
+				<!-- AMANDA -->
+				<section data-background-video="video/LC.mp4" type="video/mp4" data-background-color="#000">
+				</section>
+				<section data-background-video="video/16.04.bendy.mp4" type="video/mp4" data-background-color="#000">
+				</section>
+				<section class="fit" data-background-image="images/amanda/20160630PickAndPlace.png"></section>
+				<section class="fit" data-background-image="images/amanda/20160630Hierarchy.png"></section>
+				<section class="fit" data-background-image="images/amanda/20160125simulationDynamics.png"></section>
+				<section class="fit" data-background-image="images/amanda/20160712Workflow.png"></section>
+				<section class="fitv" data-background-image="images/amanda/20160703EliRenderNanobot.jpg"></section>
+<!-- 				<section class="fit" data-background-image="images/dmdesign.png">
+					<a href="http://git.amandaghassaei.com/DMDesign/#" data-preview-link><span style="position:absolute;width:100%;height:100%;"></span></a>
+				</section> -->
+
+				<!-- PRASHANT -->
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_01.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_02.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_03.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_04.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_05.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_06.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_07.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_08.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_09.png" data-background-color="#000"></section>
+				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_10.png" data-background-color="#000"></section>
+				<!-- <section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_11.png" data-background-color="#000"></section> -->
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				width: '100%',
+				history: true,
+				controls: false,
+				transitionSpeed: 'fast',
+				transition: "none",
+				backgroundTransition: "none",
+				showNotes: false,
+				slideNumber: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});	
+		</script>
+
+		<script>
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+    			if (Reveal.getState().indexh == 1) {
+    				document.getElementById('usernote').style.display = "none";
+    			} 
+    			else if (Reveal.getState().indexh == 0) {
+    				document.getElementById('usernote').style.display = "block";
+    			}
+			} );
+		</script>
+	</body>
+</html>
