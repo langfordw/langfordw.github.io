@@ -23,9 +23,12 @@
 	</head>
 	<body>
 		<div class="reveal">
+		<span id="usernote" class="user-notes" style="display:block">
+		"o" for overview, "f" for fullscreen, left and right arrows to navigate.
+		</span>
 			<div class="slides">
-
 				<section class="fit" data-background-image="images/msec/Slide01.png"></section>
+				<!-- <div class="backgrounds"><pre>"o" for overview</pre></div> -->
 				<section class="fit" data-background-image="images/msec/Slide02.png"></section>
 				<section class="fit" data-background-image="images/msec/Slide03.png"></section>
 				<section class="fit" data-background-image="images/msec/Slide04.png"></section>
@@ -104,15 +107,22 @@
 		<script src="js/reveal.js"></script>
 
 		<script>
+			
+
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				width: '100%',
 				history: true,
-				controls: true,
+				controls: false,
 				transitionSpeed: 'fast',
 				transition: "none",
 				backgroundTransition: "none",
 				showNotes: false,
+				// slideNumber: true,
+
+				// keyboard: {
+				// 	h: Reveal.configure({ controls: true })
+				// },
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
@@ -122,6 +132,20 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+
+			
+		</script>
+
+		<script>
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+    			// console.log(Reveal.getState())
+    			if (Reveal.getState().indexh == 1) {
+    				document.getElementById('usernote').style.display = "none";
+    			} 
+    			else if (Reveal.getState().indexh == 0) {
+    				document.getElementById('usernote').style.display = "block";
+    			}
+			} );
 		</script>
 	</body>
 </html>

@@ -303,6 +303,20 @@ body {
 .reveal .slide-number-delimiter {
   margin: 0 3px; }
 
+/* User notes */
+.reveal .user-notes {
+  position: absolute;
+  display: block;
+  left: 2%;
+  bottom: 2%;
+  z-index: -1;
+  font-family: Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  color: #777;
+  margin: 0 0px;
+}
+
 /*********************************************
  * SLIDES
  *********************************************/
