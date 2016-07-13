@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Merck Presentation</title>
+		<title>CBA Presentation</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/white.css">
@@ -33,10 +33,19 @@
 		</span> -->
 			<div class="slides">
 
-				<section class="fit" data-background-image="images/merck_title.png">&nbsp;</section>
+				<section class="fit" data-background-image="images/16.02_cba_overview.jpg">&nbsp;</section>
 				<section class="fit" data-background-image="images/14.05.NC_brick.png">&nbsp;</section>
-				<section class="fit" data-background-image="images/merck_overview.png">&nbsp;</section>
-				<section class="fit" data-background-image="images/gik_parts.png">&nbsp;</section>
+				<!-- <section class="fit" style="display:block;width:100%;height:100%" data-background-image="images/merck_overview.png">&nbsp;<a class="emptyspace" href="#prashant"></a></section> -->
+				<section>
+					<div style="display:inline-block;width:23%"><a href="#will"><img src="images/microassembly.png"></a></div>
+					<div style="display:inline-block;width:23%"><a href="#amanda"><img src="images/cadcam.png"></a></div>
+					<div style="display:inline-block;width:23%"><a href="#prashant"><img src="images/nanoassembly.png"></a></div>
+					<div style="display:inline-block;width:23%"><img src="images/foldedassembly.png"></div>
+				</section>
+
+			<!-- WILL -->
+			<section>
+				<section id="will" class="fit" data-background-image="images/gik_parts.png">&nbsp;</section>
 				<section class="fit" data-background-image="images/gik_circuits.png">&nbsp;<a href="3" class="navigate-next"><h1 style="color:rgba(0,0,0,0);">video</h1></a></section>
 				<section id="blink" data-background-video="video/13.11.blink.mp4" type="video/mp4" data-background-color="#FFF">
 				&nbsp;</section>
@@ -50,9 +59,11 @@
 				<section class="fit" data-background-image="images/scaling.png">&nbsp;</section>
 				<section class="fit" data-background-image="images/functional_parts.png">&nbsp;</section>
 				<section class="fit" data-background-image="images/assembled_assembler.png">&nbsp;</section>
+			</section>
 
-				<!-- AMANDA -->
-				<section data-background-video="video/LC.mp4" type="video/mp4" data-background-color="#000">
+			<!-- AMANDA -->
+			<section>
+				<section id="amanda" data-background-video="video/LC.mp4" type="video/mp4" data-background-color="#000">
 				&nbsp;</section>
 				<section data-background-video="video/16.04.bendy.mp4" type="video/mp4" data-background-color="#000">
 				&nbsp;</section>
@@ -61,12 +72,15 @@
 				<section class="fit" data-background-image="images/amanda/20160125simulationDynamics.png">&nbsp;</section>
 				<section class="fit" data-background-image="images/amanda/20160712Workflow.png">&nbsp;</section>
 				<section class="fitv" data-background-image="images/amanda/20160703EliRenderNanobot.jpg">&nbsp;</section>
+			</section>
+
 	<!-- 			<section class="fit" style="display:block;width:100%;height:100%" data-background-image="images/dmdesign.png">
 					&nbsp;<a class="emptyspace" href="http://git.amandaghassaei.com/DMDesign/#" data-preview-link><img src="images/dmdesign.png" width=600></a>
 				</section> -->
 
-				<!-- PRASHANT -->
-				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_01.png" data-background-color="#000">&nbsp;</section>
+			<!-- PRASHANT -->
+			<section>
+				<section id="prashant" class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_01.png" data-background-color="#000">&nbsp;</section>
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_02.png" data-background-color="#000">&nbsp;</section>
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_03.png" data-background-color="#000">&nbsp;</section>
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_04.png" data-background-color="#000">&nbsp;</section>
@@ -76,6 +90,7 @@
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_08.png" data-background-color="#000">&nbsp;</section>
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_09.png" data-background-color="#000">&nbsp;</section>
 				<section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_10.png" data-background-color="#000">&nbsp;</section>
+			</section>
 				<!-- <section class="fit" data-background-image="images/prashant_nanoassembly/Nanoassembly_Page_11.png" data-background-color="#000"></section> -->
 			</div>
 		</div>
@@ -104,6 +119,12 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});	
+
+			// Reveal.configure({
+			// 	keyboard: {
+			// 		13: Reveal.setState(3)
+			// 	}
+			// });
 		</script>
 
 		<script>
