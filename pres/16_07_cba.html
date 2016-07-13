@@ -120,11 +120,14 @@
 				]
 			});	
 
-			// Reveal.configure({
-			// 	keyboard: {
-			// 		13: Reveal.setState(3)
-			// 	}
-			// });
+			Reveal.configure({
+				keyboard: {
+					13: function() {
+						Reveal.slide(2)
+						console.log("returning to top")
+					}
+				}
+			});
 		</script>
 
 		<script>
