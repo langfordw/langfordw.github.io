@@ -18,8 +18,11 @@
     <!-- 
       TO DO:
         - dual units would be nice (display unit is configurable)
-        - add export!
         - ability to modify endpoints of dimension line by clicking and dragging
+        - 3 point circle diameter measurement
+        - ability to straighten image and align to a grid
+        - perpendicular end-segments to measurement line (to ensure you're measuring orthogonally)
+        - bug with digicam, doesn't update when you push the button (after the first time)
      -->
 
     <style>
@@ -397,7 +400,6 @@
           var file_reader = new FileReader();
           var imgtag = document.getElementById("img");
           imgtag.title = selectedImage.name;
-
           file_reader.onload = function(event) {
             imgtag.setAttribute('xlink:href',event.target.result);
           }
@@ -408,7 +410,10 @@
 
   document.getElementById("digicambtn").onclick = function(evt) {
           var imgtag = document.getElementById("img");
-          imgtag.setAttribute('xlink:href','http://localhost:5513/preview.jpg');
+          // should i set this to null first to trigger a change?
+          //imgtag.setAttribute('xlink:href','');
+          var src = 'http://localhost:5513/preview.jpg?t=' + new Date().getTime();
+          imgtag.setAttribute('xlink:href',src);
         }
 
   document.getElementById("measurebtn").onclick = function() {
