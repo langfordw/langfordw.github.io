@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <a id="export_link" download="voice_coil.svg" href="">Download SVG</a>
+  <div style="height:90vh">
+    <svg style="padding:10px" width="auto" height="100%" viewBox="0 0 1800 3175"
+         xmlns="http://www.w3.org/2000/svg" version="1.1" id="thissvg">
+
+      <path id="coil" d="" style="fill:black"/>
+      
+      <script type="application/javascript">
+      // necessary to prevent XML from trying to interpret this script:
+      <![CDATA[
+
+        var svg = document.getElementById("thissvg");
+        console.log(svg)
+        var coil = svg.getElementById("coil");
+        console.log(coil)
+
+        var coil_width = 1800;
+        var coil_height = 3175;
+        var coil_margin = 100;
+        var trace_width = 50;
+        var trace_space = 50;
+        var free_space = 500;
+        var num_turns = Math.floor((coil_width-coil_margin*2 - free_space)/(2*(trace_width+trace_space)));
+        console.log("num turns = " +num_turns);
+        var d = trace_width+trace_space;
+        var hoffset = trace_width/4.;
+        var voffset = trace_width/4.;
+
+        var points_list = "";
+
+        function exportSVG(mySVG) {
+          var serializer = new XMLSerializer();
+          var source = serializer.serializeToString(mySVG);
+
+          if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+              source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+          }
+          if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+              source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+          }
+
+          source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+          var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+
+          document.getElementById("export_link").href = url;
+        }
+
+        function addPoint(x,y) {
+          // add path node at absolute coordinate (x,y)
+          points_list += ("L" + x + "," + y + " ");
+        }
+
+        // starting point (with Move command)
+        points_list += ("M" + (coil_margin-hoffset) + "," + (coil_margin-voffset) + " ");
+
+        // place outer points
+        for (var i = 0; i<num_turns; i++) {
+          if (i == 0) { /*Skip First one*/ }
+          else { addPoint(coil_margin+i*d-hoffset,coil_margin+(i-1)*d-voffset); }
+          addPoint(coil_margin+i*d-hoffset,coil_height-coil_margin-i*d+voffset);
+          addPoint(coil_width-coil_margin-i*d+hoffset,coil_height-coil_margin-i*d+voffset);
+          addPoint(coil_width-coil_margin-i*d+hoffset,coil_margin+i*d-voffset);
+        }
+        
+        addPoint(coil_margin+(num_turns)*d,coil_margin+(num_turns-1)*d-voffset);
+        addPoint(coil_margin+(num_turns)*d,coil_margin+(num_turns-1)*d+trace_width+voffset);
+
+        // place inner points
+        for (var i = num_turns; i>0; i--) {
+          addPoint(coil_width-coil_margin-(i-1)*d-trace_width-hoffset,coil_margin+(i-1)*d+trace_width+voffset);
+          addPoint(coil_width-coil_margin-(i-1)*d-trace_width-hoffset,coil_height-coil_margin-(i-1)*d-trace_width-voffset);
+          addPoint(coil_margin+(i-1)*d+trace_width+hoffset,coil_height-coil_margin-(i-1)*d-trace_width-voffset);
+          if (i == 1) { /*Skip Last one*/ }
+          else { addPoint(coil_margin+(i-1)*d+trace_width+hoffset,coil_margin+(i-2)*d+trace_width+voffset); }
+        }
+
+        addPoint(coil_margin+trace_width+hoffset,coil_margin-voffset); 
+
+        // close path
+        points_list += "Z";
+
+        // debug points list
+        console.log(points_list)
+
+        // write path out
+        coil.setAttribute('d',points_list);
+
+        //create download link
+        exportSVG(svg);
+      ]]>
+      </script>
+    </svg>
+  </div>
+</body>
+</html>
