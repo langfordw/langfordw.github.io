@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - geometry - catmull spline editor</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #404040;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="build/three.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
+		<script src="js/controls/TransformControls.js"></script>
+		<script src="js/controls/DragControls.js"></script>
+
+		<script src="js/libs/stats.min.js"></script>
+
+
+		<div align="center" style="width:33%;padding:10px;display:block;margin:auto">
+		 <form role="form" style="background-color: #e0e0e0;padding-bottom:15px;padding-top:10px">
+		  <div class="form-group">
+		    <label for="length">Length:</label>
+		    <input type="range" class="form-control" id="length" onchange="updateGIK()" min=0.01 max=40 step=0.1 default=20>
+		    <span type="text" id="length_value"></span>
+		  </div>
+		  <div class="form-group">
+		    <label for="pitch">Pitch:</label>
+		    <input type="range" class="form-control" id="pitch" onchange="updatePitch()" min=10 max=40 step=0.1>
+		    <span type="text" id="pitch_value"></span>
+		  </div>
+		  <div class="form-group">
+		    <label for="thickness">Thickness:</label>
+		    <input type="range" class="form-control" id="thickness" onchange="updateGIK()" min=0.01 max=20 step=0.1>
+		    <span type="text" id="thickness_value"></span>
+		  </div>
+		  <div class="form-group">
+		    <label for="height">Height:</label>
+		    <input type="range" class="form-control" id="height" onchange="updateHeight()" min=0.01 max=40 step=0.1>
+		    <span type="text" id="height_value"></span>
+		  </div>
+		</form>
+		</div>
+
+		<script>
+
+			String.prototype.format = function () {
+
+				var str = this;
+				for ( var i = 0; i < arguments.length; i ++ ) {
+
+					str = str.replace( '{' + i + '}', arguments[ i ] );
+
+				}
+				return str;
+
+			}
+
+			var container, stats;
+			var camera, scene, renderer;
+			var splineHelperObjects = [],
+				splineOutline;
+			var splinePointsLength = 4;
+			var positions = [];
+			var options;
+
+			var geometry = new THREE.BoxGeometry( 20, 20, 20 );
+
+			var ARC_SEGMENTS = 200;
+			var splineMesh;
+
+			var splines = {
+
+			};
+
+			var gik_geom, gik_geom2, gik_mesh, gik_mesh2;
+			var n_gik_x = 6, n_gik_y = 3, n_gik_z = 3;
+			var length, pitch, thickness, height;
+			var gik_objs = [];
+			
+
+			length = document.getElementById('length');
+			pitch = document.getElementById('pitch');
+			thickness = document.getElementById('thickness');
+			height = document.getElementById('height');
+
+			length_label = document.getElementById('length_value');
+			height_label = document.getElementById('height_value');
+			thickness_label = document.getElementById('thickness_value');
+			pitch_label = document.getElementById('pitch_value');
+
+			length.defaultValue = 20;
+			pitch.defaultValue = 10;
+			thickness.defaultValue = 2;
+			height.defaultValue = 12.5;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+				scene = new THREE.Scene();
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.z = 1000;
+				scene.add( camera );
+
+				scene.add( new THREE.AmbientLight( 0x404040 ) );
+				var light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 1500, 200 );
+				light.castShadow = true;
+				light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 70, 1, 200, 2000 ) );
+				light.shadow.bias = -0.000222;
+				light.shadow.mapSize.width = 1024;
+				light.shadow.mapSize.height = 1024;
+				scene.add( light );
+				spotlight = light;
+
+				// scene.add( new THREE.CameraHelper( light.shadow.camera ) );
+
+				var planeGeometry = new THREE.PlaneGeometry( 2000, 2000 );
+				planeGeometry.rotateX( - Math.PI / 2 );
+				var planeMaterial = new THREE.ShadowMaterial();
+				planeMaterial.opacity = 0.2;
+
+				var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+				plane.position.y = -200;
+				plane.receiveShadow = true;
+				scene.add( plane );
+
+				var helper = new THREE.GridHelper( 1000, 100 );
+				helper.position.y = - 199;
+				helper.material.opacity = 0.25;
+				helper.material.transparent = true;
+				scene.add( helper );
+
+				var axis = new THREE.AxisHelper();
+				axis.position.set( -500, -500, -500 );
+				scene.add( axis );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setClearColor( 0x404040 );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.shadowMap.enabled = true;
+				container.appendChild( renderer.domElement );
+
+				var info = document.createElement( 'div' );
+				info.style.position = 'absolute';
+				info.style.top = '10px';
+				info.style.width = '100%';
+				info.style.textAlign = 'center';
+				// info.innerHTML = 'catmull-rom rom spline comparisions';
+				options = document.createElement( 'div' );
+				options.style.position = 'absolute';
+				options.style.top = '30px';
+				options.style.width = '100%';
+				options.style.textAlign = 'center';
+
+
+				container.appendChild( info );
+				container.appendChild( options );
+
+				stats = new Stats();
+				// container.appendChild( stats.dom );
+
+				// Controls
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.damping = 0.2;
+				controls.addEventListener( 'change', render );
+
+				transformControl = new THREE.TransformControls( camera, renderer.domElement );
+				transformControl.addEventListener( 'change', render );
+
+				scene.add( transformControl );
+
+				var dragcontrols = new THREE.DragControls( camera, splineHelperObjects, renderer.domElement ); //
+
+				dragcontrols.on( 'hoveron', function( e ) {
+
+					transformControl.attach( e.object );
+					// cancelHideTransorm(); // *
+
+				} )
+
+				dragcontrols.on( 'hoveroff', function( e ) {
+
+					if ( e ) delayHideTransform();
+
+				} )
+
+
+				controls.addEventListener( 'start', function() {
+
+					// cancelHideTransorm();
+
+				} );
+
+				controls.addEventListener( 'end', function() {
+
+					// delayHideTransform();
+
+				} );
+
+				drawGIK();
+				updateGIK();
+				updateHeight();
+				updatePitch();
+				
+			}
+
+			function drawGIK() {
+				gik_geom = new THREE.BoxGeometry( 1, 1, 1 );
+				material = new THREE.MeshBasicMaterial( { color: 0x2255cc, wireframe: false } );
+
+				for (var k=0; k < n_gik_z; k++ ) {
+					for (var i=0; i < n_gik_y; i++) {
+						for (var j=0; j < n_gik_x; j++) {
+							var gik = new THREE.Mesh( gik_geom , material );
+							gik.position.z = i*2*pitch.value+pitch.value*(j%2)*(-1*(k%2))+(k%2)*pitch.value/2.-(!(k%2==0))*pitch.value;
+							gik.position.x = j*pitch.value+(k%2)*pitch.value/2.;
+							gik.position.y = k*.5*height.value;
+							gik.rotation.y = (k%2)*3.1415926/2.;
+
+							scene.add( gik );
+							gik_objs.push(gik);
+
+							var edges = new THREE.EdgesHelper( gik, 0x00ffff )
+							edges.material.linewidth = 2;
+
+							scene.add(edges);
+						}
+					}
+				}
+			}
+
+			function updateGIK() {
+				for (var i = 0; i < gik_objs.length; i++) {
+					gik_objs[i].scale.x = length.value;
+					gik_objs[i].scale.z = thickness.value;
+
+					length_label.innerHTML = length.value;
+					thickness_label.innerHTML = thickness.value;
+
+				}
+				render();
+				console.log(length.value)
+			}
+
+			function updatePitch() {
+				pitch_label.innerHTML = pitch.value;
+				var count = 0;
+				for (var k=0; k < n_gik_z; k++ ) {
+					for (var i=0; i < n_gik_y; i++) {
+						for (var j=0; j < n_gik_x; j++) {
+							var gik = gik_objs[count];
+							count = count+1;
+							gik.position.z = i*2*pitch.value+pitch.value*(j%2)+(k%2)*pitch.value/2.-(!(k%3==0))*pitch.value;
+							gik.position.x = j*pitch.value-(k%2)*pitch.value/2.;
+							gik.position.y = k*.5*height.value*1.1;
+							gik.rotation.y = (k%2)*3.1415926/2.;
+						}
+					}
+				}
+				render();
+			}
+
+
+			function updateHeight() {
+				height_label.innerHTML = height.value;
+				var count = 0;
+				for (var k=0; k < n_gik_z; k++ ) {
+					for (var i=0; i < n_gik_y; i++) {
+						for (var j=0; j < n_gik_x; j++) {
+							var gik = gik_objs[count];
+							gik.position.z = i*2*pitch.value+pitch.value*(j%2)-(k%2)*pitch.value/2.+(!(k%3==0))*pitch.value;
+							gik.position.x = j*pitch.value+(k%2)*pitch.value/2.;
+							gik.position.y = k*.5*height.value*1.1;
+							gik.rotation.y = (k%2)*3.1415926/2.;
+
+							gik_objs[count].scale.y = height.value;
+							count = count+1;
+						}
+					}
+				}
+				render();
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				render();
+				stats.update();
+				controls.update();
+				transformControl.update();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>
