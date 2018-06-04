@@ -4,7 +4,8 @@ body,h1,h2,h3,h4,h5,h6 {
 }
 
 body {
-	font-family: 'Droid Sans', sans-serif,'Helvetica', sans-serif, 'Droid Serif', serif;
+	/*font-family: 'Droid Sans', sans-serif,'Helvetica', sans-serif, 'Droid Serif', serif;*/
+	font-family: 'Droid Sans';
 	background-color: #ebebeb;
 	/*background-color: #f1f1f1;*/
 }
