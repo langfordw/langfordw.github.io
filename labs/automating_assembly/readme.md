@@ -10,6 +10,8 @@ Since we're assembling systems from more than two part-types (likely ~5-10), rat
 
 <div align="center"><video controls width="800px" src="part_feeder/video/strut_feeder_converted.mp4"></video></div>
 
+<br>
+
 I'm also developing a javascript interface to control the assembler and integrate feedback systems such as computer vision to detect (and possibly correct) errors.
 
 <div align="center">
