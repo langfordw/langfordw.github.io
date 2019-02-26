@@ -10,6 +10,12 @@ Since we're assembling systems from more than two part-types (likely ~5-10), rat
 
 <div align="center"><video controls width="800px" src="part_feeder/video/strut_feeder_converted.mp4"></video></div>
 
+I'm also developing a javascript interface to control the assembler and integrate feedback systems such as computer vision to detect (and possibly correct) errors.
+
+<div align="center">
+<img src="images/screenshot.png" width="800px" height="" >
+</div>
+
 <!-- This builds off previous work which developed assemblers for electronic digital materials:
 
 <video controls src="../walking_motor/video/dual_stapler_cut3_converted.mp4" width="80%"></video> -->
