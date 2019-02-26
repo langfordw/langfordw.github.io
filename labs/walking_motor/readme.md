@@ -42,10 +42,10 @@ I would like to measure the speed of the rotor slider across a range of step fre
 
 <img src="images/walking_motor_speed_graphic-04.png" width="80%">
 
-The data matches our expectations quite well. We see that the slope does match the pitch of the rotor. Below 12Hz, there are almost no lost or skipped steps. Beyond 12Hz, there is a little more variability but overall pretty good agreement. 
+The data matches our expectations quite well. We see that the slope does match the pitch of the rotor. Below 12Hz, there are almost no lost or skipped steps. Beyond 12Hz, there is a little more variability but overall pretty good agreement.
 
-### Next Steps
+<!-- ### Next Steps
 
 Next steps will involve integration of control and circuitry in the assemblies as well as the development of an automated means of assembly like we have done previously:
 
-<video controls src="video/dual_stapler_cut3_converted.mp4" width="80%"></video>
+<video controls src="video/dual_stapler_cut3_converted.mp4" width="80%"></video> -->
