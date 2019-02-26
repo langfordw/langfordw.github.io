@@ -1,0 +1,21 @@
+<html>
+
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.17/marked.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<xmp id="content" theme="spacelab" style="display:none;">
+</xmp>
+
+<script>
+	$('#content').load("readme.md", function() {
+		// $.getScript("../strapdown.js");
+		var s = document.createElement("script");
+		s.type = "text/javascript";
+		s.src = "../../strapdown.js";
+		$("head").append(s);
+	});
+</script>
+
+</html>
