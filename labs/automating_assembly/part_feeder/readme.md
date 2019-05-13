@@ -26,6 +26,8 @@ To control the orientation of parts, you can do all sorts of various tricks. [Th
 
 <img src="images/feeder_orientation.png" width="400px">
 
+
+
 ### Strut Feeder
 
 #### Initial Prototype
@@ -40,10 +42,11 @@ Holding the end of the feeder rigidly does significantly impact the part conveya
 
 #### Simulating
 
-Modal analysis of the structure made has the first mode at anywhere between 70Hz and 140Hz depending on the material.
- * With "PC/ABS" the first mode occurs at 137Hz.
- * with steel top part and aluminum flexure: first mode at 128Hz (7.6 krpm)
- * with PC/ABS top part and aluminum flexure: first mode at 257Hz (15.4 krpm)
+Modal analysis of the structure made has the first mode at anywhere between 70Hz and 140Hz depending on the material. With "PC/ABS" the first mode occurs at 137Hz.
+
+with steel top part and aluminum flexure: first mode at 128Hz (7.6 krpm)
+
+with PC/ABS top part and aluminum flexure: first mode at 257Hz (15.4 krpm)
 
 #### Refined Prototype
 
@@ -51,13 +54,12 @@ After a few iterations, I came across a design which uses an EDM-cut insert that
 
 <img src="images/strut_feeder_design.png" width="500px">
 
-<video controls width="500px" src="video/strut_feeder_converted.mp4"></video>
-
-<br>
+<!-- ![strut_feeder_converted.mp4](video/strut_feeder_converted.mp4) -->
+<video width="800px" src="video/strut_feeder_converted.mp4"></video>
 
 The feeder works well with a steady stream of parts but tends to clog at the inlet to the 1 part-thickness region. We might be able to resolve this by moving the single-part region further upstream.
 
-<!-- #### Misalignment
+#### Misalignment
 
 I've noticed that the strut is not centered in its pickup location. It's possible this is due to burrs on the side of the part.
 
@@ -66,12 +68,11 @@ Actually, this appears to be present in the design itself. So should be a relati
 I should still worry about burrs causing misalignment. This should be possible by shaping the strut holder in such a way that the burrs don't make contact.
 
 <img src="images/strut_feeder_missalignment.png" width="200px">
-
-<img src="images/strut_feeder_no_burr_still_misaligned.png" width="200px"> -->
+<img src="images/strut_feeder_no_burr_still_misaligned.png" width="200px">
 
 #### Vibration Source
 
-For the initial prototypes I made my own vibration motor from a 8mm diameter DC motor I found around the lab. I super-glued a wire-rope nut onto the shaft to create an eccentric weight.
+For the initial prototypes I made my own vibration motor from a ~8mm diameter DC motor I found around the lab. I super-glued a wire-rope nut onto the shaft to create an eccentric weight.
 
 I ordered an assortment of vibration motors to test. In order of most to least effective they are:
 
@@ -83,26 +84,23 @@ I'm learning that for quiet, efficient conveyance I want higher-frequency, small
 
 [Precision Microdrives](https://www.precisionmicrodrives.com/) is a good source of high-quality, well-documented vibration motors. This [coin one](https://www.precisionmicrodrives.com/product/307-105-7mm-vibration-motor-2mm-type) looks interesting as well as [this high-speed one](https://www.precisionmicrodrives.com/product/312-401-12mm-vibration-motor-15mm-type). They also sell [linear resonant actuators](https://www.precisionmicrodrives.com/product/c08-001-8mm-linear-resonant-actuator-3mm-type) which are driven sinusoidal at any frequency (but have much reduced amplitude off of their resonant frequency).
 
-
 #### High-Speed Analysis
 
 Looking at the feeder with the high-speed camera lets us see how the frequency of oscillation relates to speed of part conveyance.
 
-<video controls width="500px" src="video/high_speed_conveyance_clip_2999fps_converted.mp4"></video>
-
-<br>
+<!-- ![high_speed_conveyance_clip_2999fps_converted.mp4](video/high_speed_conveyance_clip_2999fps_converted.mp4) -->
+<video width="800px" src="video/high_speed_conveyance_clip_2999fps_converted.mp4"></video>
 
 Using Tracker, I looked at a spot on the feeder and tracked its movement. Using the built-in data analysis tool, I fit a sinusoid and found the frequency of oscillation to be approximately 15.56 rad/s or 2.47Hz. Of course this is with the 60fps playback. Given that the clip was originally shot at 2999fps, that correlates to a frequency of 123.45 Hz. This frequency means the motor must have been turning at 7400 RPM. (The motor used in this test was the off-the-CBA-shelf 8mm motor with a wire-rope eccentric nut.)
 
-<img src="images/feeder_tracked_oscillation.png" width="500px">
+![feeder_tracked_oscillation](images/feeder_tracked_oscillation.png)
 
 ### Node Feeder
 
 The design of the node feeder was relatively straight forward. The only thing that was slightly nontrivial was ensuring that the nodes that aren't in the right orientation don't clog the rest of them from getting in. I solved this by simply extending the top plate out into the bowl area. This means that if nodes are stuck up against the top plate, other nodes can still go around it and nudge the stuck node until it gets in the right orientation.
 
-<video width="500px" src="video/node_feeder_converted.mp4"></video>
-
-<br>
+<!-- ![node_feeder_converted.mp4](video/node_feeder_converted.mp4) -->
+<video width="800px" src="video/node_feeder_converted.mp4"></video>
 
 The next step with this one is just bringing a bottom support up under the pickup location to serve as a backstop during pickup.
 
@@ -114,15 +112,13 @@ In order to build nodes, I need an ordered stream of node-parts. This has the ad
 
 I've implemented a first prototype of this using a 3-position slider:
 
-
-<img src="images/selector_feeder_design.png" width="500px">
-
+![selector_feeder_design](images/selector_feeder_design.png)
 
 When the slider is in the middle position, a single part is able to enter its cavity but is blocked by moving any further. Once the orientation of the part is determined, the slider moves one way or the other and the part is allowed to travel in the designated channel.
 
-<video controls width="500px" src="video/node_part_sorting_converted.mp4"></video>
+<!-- ![node_part_sorting_converted.mp4](video/node_part_sorting_converted.mp4) -->
 
-<br>
+<video width="80%" src="video/node_part_sorting_converted.mp4"></video>
 
 The mechanism seems to work reasonably well. I ran into a few issues with this first iteration that will need to be fine-tuned. The parts sometimes jam at the inlet to the single width zone. This happens when the part gets lodged in the wrong orientation. I'm not immediately sure how to fix this but I'm sure there is a simple solution. Another issue is simply that the 90-degree flip region is too wide and the parts get stuck in their flat orientation. This should be a trivial fix.
 
@@ -161,4 +157,4 @@ Each feeder stores its last used duty cycle in eeprom such that configuration on
 | M2.5x10     | 1        |
 | M2x8        | 6        |
 
-<img src="images/DSC_0046.jpg" width="500px">
+![DSC_0046@0,25x](images/DSC_0046.jpg)
