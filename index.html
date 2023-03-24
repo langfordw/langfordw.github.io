@@ -1,279 +1,63 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Will Makes Things</title>
-<!-- <link rel="stylesheet" href="style.css"> -->
-<link rel="stylesheet" href="css/site2.css">
-<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-<link rel="shortcut icon" href="/favicon.png" >
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Will Langford is an engineer, technology leader, and entrepreneur. He gets excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.">
+        <title>Will Builds Things</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://use.typekit.net/vch1ekh.css"> 
+        <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+        <script>
 
+          function scrollToPosition() {
+            var content_window = document.getElementById("what-i-do");
+            content_window.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            // var link  = document.getElementById("backlink");
+            // link.click();
+          }
+          function expandContent(mdPath) {
+            // show selected content
+            var content_window = document.getElementById("content-window");
+            content_window.style.display = "block";
+            content_window.innerHTML = "<zero-md src='docs/"+mdPath+"''></zero-md>";
 
-<body>
-		<div class="heading">
-			<h1 class="alignleft">&#8194; Will Makes Things.</h1><br>
-			<span class="alignright">
-				<!-- <a class="title" href="labs/index.html">Labs</a> -->
-				<a class="title" href="about.html">About Me</a>
-				<!-- <a class="title" href="resume.pdf">Resum&eacute;</a> -->
-			<span>
-		</div>
-		<div style="clear: both;"></div>
-		<br>
-	    <div class="main">
-	        <ul>
+            document.getElementById("back-to-top").style.display = "flex"
+            
+            setTimeout(scrollToPosition, 10);
+          }
+        </script>
+    </head>    
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>WILL LANGFORD</h1>
+      </div>
+    </header>
+    <div class="content">
+      <div class="text">
+        <h3>I am an engineer, technology leader, and entrepreneur. I get excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.
+        <br><br>
+        <a href="Will_Langford_CV.pdf">Learn more about what I do</a>.
+        <br><br>
+        </h3>
+      </div>
+      <div class="video-container">
+        <video width="100%" height="auto" autoplay muted loop playsinline>
+          <source src="assets/video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </body>
 
-	        	<li>
-		          <div class="project">
-		            <a href="https://langfordw.pages.cba.mit.edu/desktopWEDM/">
-		            <img class="thumb" src="img/cute_dwedm-01.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Desktop Wire-EDM</h3>
-							<h3 class="date">2017</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	        	<li>
-		          <div class="project">
-		            <a href="tabletopInstron/index.html">
-		            <img class="thumb" src="img/cute_tabletopinstron-01.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Tabletop Instron</h3>
-							<h3 class="date">2017</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-		        
-	        	 <li>
-		          <div class="project">
-		            <a href="stapler/index.html">
-		            <img class="thumb" src="img/cute_stapler.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Stapler Assembler</h3>
-							<h3 class="date">2016</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="mechsim/index.html">
-		            <img class="thumb" src="img/cute_mechsim-01.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Mechsim FEA</h3>
-							<h3 class="date">2016</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-		        <li>
-		          <div class="project">
-		            <a href="popup/index.html">
-		            <img class="thumb" src="img/cute_popup-02.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Pop-Up Voxels</h3>
-							<h3 class="date">2016</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="electronic_digital_materials/index.html">
-		            <img class="thumb" src="img/cute_digiMat-01.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Electronic Digital Materials</h3>
-							<!-- <h3 class="date">2012-2014</h3> -->
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="micropillars/index.html">
-		            <img class="thumb" src="img/cute_micropillars.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Micropillars</h3>
-							<h3 class="date">2014</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="ocelot/index.html">
-		            <img class="thumb" src="img/cute_ocelot.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Ocelot</h3>
-							<h3 class="date">2013</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="foldafab/index.html">
-		            <img class="thumb" src="img/cute_foldafab.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Foldafab</h3>
-							<h3 class="date">2013</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="handheld_cnc/index.html">
-		            <img class="thumb" src="img/cute_spindle.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Handheld CNC</h3>
-							<h3 class="date">2012</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="mimbo/index.html">
-		            <img class="thumb" src="img/cute_mimbo.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Mimbo</h3>
-							<h3 class="date">2011</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="hippo/index.html">
-		            <img class="thumb" src="img/cute_hippo.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">FOD Hippo</h3>
-							<h3 class="date">2011</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="makerbot/index.html">
-		            <img class="thumb" src="img/cute_makerbot_ani_4.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Makerbot</h3>
-							<h3 class="date">2010</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="firefighter/index.html">
-		            <img class="thumb" src="img/cute_firefighter.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Firefighting Robots</h3>
-							<h3 class="date">2010</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="sumo/index.html">
-		            <img class="thumb" src="img/cute_sumo.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Sumobots</h3>
-							<h3 class="date">2010</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-	       		<li>
-		          <div class="project">
-		            <a href="bloombot/index.html">
-		            <img class="thumb" src="img/cute_bloombot.png">
-		            <div class="caption">
-		            	<div class="blur"></div>
-		            	<div class="caption-text">
-							<h3 class="projname">Bloombot</h3>
-							<h3 class="date">2009</h3>
-						</div>
-					</div>
-		            </a>
-		          </div>
-	       		</li>
-
-       		</ul>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-89409368-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-</body>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <p>© 2023 Will Builds Things. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </html>
+
+
