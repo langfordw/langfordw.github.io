@@ -321,6 +321,7 @@ video {
 
   #back-to-top {
     display: none;
+    margin: 20px 0;
   }
 
   #what-i-do {

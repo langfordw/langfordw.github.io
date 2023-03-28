@@ -17,22 +17,37 @@
           function scrollToPosition() {
             var content_window = document.getElementById("content-window"); //what-i-do
             content_window.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-            // var link  = document.getElementById("backlink");
-            // link.click();
           }
-          function expandContent(mdPath) {
+
+          function expandContent(mdPath,element) {
             // show selected content
             var content_window = document.getElementById("content-window");
             content_window.style.display = "block";
             content_window.innerHTML = "<zero-md src='content/docs/"+mdPath+"''></zero-md>";
 
-            // var dot_content = document.getElementsByClassName("dot-content");
-            // dot_content[0].style.display = "none";
-
             document.getElementById("back-to-top").style.display = "flex"
+
+            dot_elements = document.querySelectorAll('.dot');
+            console.log(dot_elements)
+            dot_elements.forEach(element => {
+                element.classList.remove("selected")
+            });
+
+            dot_element = element.querySelector('.dot');
+            dot_element.classList.add("selected");
             
-            setTimeout(scrollToPosition, 10);
+            setTimeout(scrollToPosition, 50);
           }
+          document.addEventListener('touchstart', function(e) {
+            // Get the dot content element and its parent dot container element
+            var dotContent = document.querySelector('.dot-content');
+            var dotContainer = dotContent.parentElement;
+
+            // If the touch event target is not a descendant of the dot container or the dot content element, hide the dot content
+            if (!dotContainer.contains(e.target) && !dotContent.contains(e.target)) {
+            dotContent.style.display = 'none';
+            }
+            });
         </script>
     </head>    
   <body>
@@ -80,32 +95,84 @@
     </svg> -->
 
     <div class="venn-container">
+      <!-- <div class="arrow-left"></div> -->
       <div class="venn-diagram">
         <div class="circle circle-build"></div>
         <div class="circle circle-lead"></div>
         <div class="circle circle-innovate"></div>
-        <div class="dot-container" style="top:25%; left:25%;">
-          <div class="dot" onclick="expandContent('microwalkers.md')"></div>
+        <div class="dot-container" style="top:45%; left:30%;" onclick="expandContent('microwalkers.md',this)">
+          <div class="dot"></div>
           <div class="dot-content">
             <h4>Discrete Robotic Construction</h4>
             <img src="content/microwalker.jpeg">
           </div>
         </div>
-        <div class="dot-container" style="top:15%; left:80%;">
-          <div class="dot" onclick="expandContent('rtf.md')"></div>
+        <div class="dot-container" style="top:20%; left:52%;" onclick="expandContent('rtf.md',this)">
+          <div class="dot"></div>
           <div class="dot-content">
-            <h4>Discrete Robotic Construction</h4>
+            <h4>Rapid Task Force for System Integration</h4>
             <img src="content/placeholder.jpeg">
           </div>
         </div>
-        <div class="dot-container" style="top:45%; left:40%;">
-          <div class="dot" onclick="expandContent('planning.md')"></div>
+        <div class="dot-container" style="top:25%; left:70%;" onclick="expandContent('planning.md',this)">
+          <div class="dot"></div>
           <div class="dot-content">
-            <h4>Discrete Robotic Construction</h4>
+            <h4>An iterative and collaborative approach to planning</h4>
             <img src="content/planning.png">
           </div>
         </div>
+        <!-- <div class="dot-container" style="top:50%; left:30%;" onclick="expandContent('.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Electronic Digital Materials</h4>
+                <img src="content/planning.png">
+            </div>
+        </div> -->
+        <div class="dot-container" style="top:45%; left:40%;" onclick="expandContent('digital_assembler.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Digital Assemblers</h4>
+                <img src="content/stapler/images/assembler_gantry02.jpg">
+            </div>
+        </div>
+        <div class="dot-container" style="top:65%; left:45%;" onclick="expandContent('makerbot.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Makerbot Industries</h4>
+                <!-- <img src="content/img/cute_makerbot.png"> -->
+                <img src="content/makerbot/globe_small_1.png">
+            </div>
+        </div>
+        <div class="dot-container" style="top:25%; left:30%;" onclick="expandContent('ocelot.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Ocelot</h4>
+                <img src="content/ocelot/images/ocelot1.jpeg">
+            </div>
+        </div>
+        <div class="dot-container" style="top:25%; left:25%;" onclick="expandContent('desktop_wire_edm.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Desktop Wire-EDM</h4>
+                <img src="content/dwedm2_01.jpeg">
+            </div>
+        </div>
+        <div class="dot-container" style="top:25%; left:45%;" onclick="expandContent('tufts_robotics_club.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Tufts Robotics Club</h4>
+                <img src="content/tufts_robotics_club/sumo_collaboration.jpeg">
+            </div>
+        </div>
+        <div class="dot-container" style="top:15%; left:45%;" onclick="expandContent('fablabs.md',this)">
+            <div class="dot"></div>
+            <div class="dot-content">
+                <h4>Fablabs</h4>
+                <img src="content/fablabs/armenia/hardworkers.jpg">
+            </div>
+        </div>
       </div>
+      <!-- <div class="arrow-right"></div> -->
     </div>
     
     
@@ -170,6 +237,16 @@
       </div>
       
     </div>
+<!-- 
+    <script>
+        var content_window = document.getElementById("content-window");
+        console.log("event registered")
+        // Attach a listener to the content_window element to detect changes
+        content_window.addEventListener("DOMSubtreeModified", function() {
+            console.log('event triggered')
+            scrollToPosition();
+        });
+    </script> -->
 
     
 

@@ -8,32 +8,29 @@
     vertical-align: baseline;
   }
 
-.container {
-    max-width: 80%;
+.venn-container {
+    width: 80vw;
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
   }
   
   .venn-diagram {
     position: relative;
     width: 100%;
-    height: 100%;
-    max-width: 800px;
     margin: 0 auto;
-    padding-bottom: 0%;
-    aspect-ratio: 1;
-    -webkit-aspect-ratio: 1;
+    padding-bottom: 100%;
+    margin-bottom: calc(-50px - 0.5vw);
   }
   
   .circle {
     position: absolute;
     width: 50%;
-    height: 50%;
+    height: calc(50% * 1);
     max-height: 50%;
     border-radius: 50%;
     opacity: 0.5;
-    aspect-ratio: 1;
-    -webkit-aspect-ratio: 1;
   }
 
   /* .circle {
@@ -71,19 +68,26 @@
   
   .dot {
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: calc(5px + 1vw);
+    height: calc(5px + 1vw);
     border-radius: 50%;
     background-color: #fff;
     transition: transform 0.2s ease-out;
     z-index: 10;
   }
+
   
   .dot:hover {
     transform: scale(1.2);
   }
+
+  .dot.selected {
+    transform: scale(1.2);
+    background-color: #f00; /* Change to the desired color */
+    box-shadow: 0 0 10px #f00; /* Add a shadow effect */
+  }
   
-  .dot-content {
+  /* .dot-content {
     display: none;
     position: relative;
     top: -10px;
@@ -94,7 +98,7 @@
     padding: 5px;
     z-index: 20;
     pointer-events: none;
-  }
+  } */
 
   .dot-content h4 {
     margin: 0px;
@@ -105,6 +109,55 @@
     height: auto;
   }
 
-  .dot:hover + .dot-content {
-    display: block;
+  .dot-content {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 20;
+    /* pointer-events: none; */
+  }
+
+  .arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-right: 16px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-left: 16px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  @media screen and (min-width: 700px) {
+    .dot:hover + .dot-content {
+      display: block;
+    }
+    .dot-content:hover {
+        display: block;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .dot-content {
+        display: none;
+    }
   }
