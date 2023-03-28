@@ -16,7 +16,8 @@
         <script>
           function scrollToPosition() {
             var content_window = document.getElementById("content-window"); //what-i-do
-            content_window.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            var content_start = content_window.querySelector("zero-md");
+            content_start.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
           }
 
           function expandContent(mdPath,element) {
