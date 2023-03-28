@@ -1,0 +1,110 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .venn-diagram {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 0%;
+    aspect-ratio: 1;
+    -webkit-aspect-ratio: 1;
+  }
+  
+  .circle {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    max-height: 50%;
+    border-radius: 50%;
+    opacity: 0.5;
+    aspect-ratio: 1;
+    -webkit-aspect-ratio: 1;
+  }
+
+  /* .circle {
+    position: absolute;
+    width: 50%;
+    height: 0; 
+    max-height: 50%;
+    padding-bottom: 50%;
+    border-radius: 50%;
+    opacity: 0.5;
+  } */
+  
+  .circle-build {
+    background-color: #f44336; /* red */
+    top: 5%;
+    left: 10%;
+  }
+  
+  .circle-lead {
+    background-color: #4caf50; /* green */
+    top: 35%;
+    left: 25%;
+  }
+  
+  .circle-innovate {
+    background-color: #2196f3; /* blue */
+    top: 5%;
+    right: 10%;
+  }
+
+  .dot-container {
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  .dot {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: transform 0.2s ease-out;
+    z-index: 10;
+  }
+  
+  .dot:hover {
+    transform: scale(1.2);
+  }
+  
+  .dot-content {
+    display: none;
+    position: relative;
+    top: -10px;
+    left: 10px;
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .dot-content h4 {
+    margin: 0px;
+  }
+  
+  .dot-content img {
+    width: 100%;
+    height: auto;
+  }
+
+  .dot:hover + .dot-content {
+    display: block;
+  }

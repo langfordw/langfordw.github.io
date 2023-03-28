@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Will Langford is an engineer, technology leader, and entrepreneur. He gets excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.">
+        <title>Will Builds Things</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="venn_style.css">
+        <link rel="stylesheet" href="https://use.typekit.net/vch1ekh.css"> 
+        <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+        <link rel="manifest" href="/assets/site.webmanifest">
+        <script>
+          function scrollToPosition() {
+            var content_window = document.getElementById("content-window"); //what-i-do
+            content_window.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            // var link  = document.getElementById("backlink");
+            // link.click();
+          }
+          function expandContent(mdPath) {
+            // show selected content
+            var content_window = document.getElementById("content-window");
+            content_window.style.display = "block";
+            content_window.innerHTML = "<zero-md src='content/docs/"+mdPath+"''></zero-md>";
+
+            // var dot_content = document.getElementsByClassName("dot-content");
+            // dot_content[0].style.display = "none";
+
+            document.getElementById("back-to-top").style.display = "flex"
+            
+            setTimeout(scrollToPosition, 10);
+          }
+        </script>
+    </head>    
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>WILL LANGFORD</h1>
+      </div>
+    </header>
+    <div class="content">
+      <div class="text">
+        <h3>I am an engineer, technology leader, and entrepreneur. I get excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.
+        <br><br>
+        <a href="#what-i-do">Learn more about what I do</a>.
+        <br><br>
+        </h3>
+      </div>
+      <div class="video-container">
+        <video width="100%" height="auto" autoplay muted loop playsinline>
+          <source src="assets/video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- <h3 id="what-i-do" style="text-align: center;">Lead <> Build <> Innovate</h3> -->
+    <div class="divider">
+      <hr class="divider-line">
+      <span class="divider-text"><h3 id="what-i-do">Lead <span style="font-size:medium; text-align: center;"> &#9826; </span> Build <span style="font-size:medium"> &#9826; </span> Innovate</h3></span>
+      <hr class="divider-line">
+    </div>
+
+    <!-- <svg viewBox="0 0 500 500">
+      <circle cx="150" cy="200" r="100" fill="blue" opacity="0.5" />
+      <circle cx="250" cy="200" r="100" fill="green" opacity="0.5" />
+      <circle cx="200" cy="300" r="100" fill="red" opacity="0.5" />
+    
+      <g class="dots">
+        <circle class="dot" cx="250" cy="220" r="4" fill="white" data-title="Portfolio Item Title" onclick="expandContent('rtf.md')" />
+        <circle class="dot" cx="140" cy="160" r="4" fill="white" />
+        <circle class="dot" cx="190" cy="240" r="4" fill="white" />
+        <circle class="dot" cx="220" cy="280" r="4" fill="white" />
+        <circle class="dot" cx="260" cy="180" r="4" fill="white" />
+        <circle class="dot" cx="270" cy="260" r="4" fill="white" />
+      </g>
+    </svg> -->
+
+    <div class="venn-container">
+      <div class="venn-diagram">
+        <div class="circle circle-build"></div>
+        <div class="circle circle-lead"></div>
+        <div class="circle circle-innovate"></div>
+        <div class="dot-container" style="top:25%; left:25%;">
+          <div class="dot" onclick="expandContent('microwalkers.md')"></div>
+          <div class="dot-content">
+            <h4>Discrete Robotic Construction</h4>
+            <img src="content/microwalker.jpeg">
+          </div>
+        </div>
+        <div class="dot-container" style="top:15%; left:80%;">
+          <div class="dot" onclick="expandContent('rtf.md')"></div>
+          <div class="dot-content">
+            <h4>Discrete Robotic Construction</h4>
+            <img src="content/placeholder.jpeg">
+          </div>
+        </div>
+        <div class="dot-container" style="top:45%; left:40%;">
+          <div class="dot" onclick="expandContent('planning.md')"></div>
+          <div class="dot-content">
+            <h4>Discrete Robotic Construction</h4>
+            <img src="content/planning.png">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+<!--     
+    <div class="portfolio-grid">
+      <div class="portfolio-item" onclick="expandContent('rtf.md')">
+        <div class="tag-icons">
+          <img class="tag-icon" src="assets/build_icon.png">
+          <img class="tag-icon" src="assets/lead_icon.png">
+        </div>
+        <img src="content/img/cute_digiMat-01.png">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('planning.md')">
+        <div class="tag-icons">
+          <img class="tag-icon" src="assets/lead_icon.png">
+        </div>
+        <img src="content/planning.png">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('microwalkers.md')">
+        <div class="tag-icons">
+          <img class="tag-icon" src="assets/build_icon.png">
+          <img class="tag-icon" src="assets/innovate_icon.png">
+        </div>
+        <img src="content/microwalker.jpeg">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('digital_assembler.md')">
+        <div class="tag-label build">Build</div>
+        <div class="tag-label innovate">Innovate</div>
+        <img src="content/img/cute_stapler.png">
+        
+      </div>
+      <div class="portfolio-item" onclick="expandContent('sumobots.md')">
+        <img src="content/img/cute_sumo.png">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('desktop_wire_edm.md')">
+        <img src="content/img/cute_dwedm-01.png">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('ocelot.md')">
+        <img src="content/img/cute_ocelot.png">
+      </div>
+      <div class="portfolio-item" onclick="expandContent('makerbot.md')">
+        <img src="content/img/cute_makerbot.png">
+      </div>
+    </div> -->
+
+    <!-- <div class="portfolio-scrollbar">
+      <div class="portfolio-scrollbar-track">
+        <div class="portfolio-scrollbar-thumb"></div>
+      </div>
+    </div> -->
+
+    <div id="content-window" class="content-window">
+      <img src='assets/down-arrow-5.svg' width=20px>
+      <zero-md src="rtf.md"></zero-md>
+    </div>
+
+    <!-- <div style="height:30vh"> -->
+      <div id="back-to-top" class="divider">
+        <hr class="divider-line">
+        <span class="divider-text"><h4><a id="backlink" href="#what-i-do">Back to top</a></h4></span>
+        <hr class="divider-line">
+      </div>
+      
+    </div>
+
+    
+
+  </body>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">
+        <p>© 2023 Will Builds Things. All rights reserved.</p>
+      </div>
+      <!-- <div class="footer-social-icons">
+        <a href="#"><img src="assets/social-icons/linkedin.png"></a>
+        <a href="#"><img src="assets/social-icons/twitter.png"></a>
+        <a href="#"><img src="assets/social-icons/github.png"></a>
+      </div> -->
+    </div>
+  </footer>
+</html>
+
+<!-- <div style="max-width: 80%; margin: auto;">
+  <zero-md src="rtf.md"></zero-md>
+  </div> -->
+
+
