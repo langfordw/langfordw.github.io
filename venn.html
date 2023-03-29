@@ -29,7 +29,6 @@
             document.getElementById("back-to-top").style.display = "flex"
 
             dot_elements = document.querySelectorAll('.dot');
-            console.log(dot_elements)
             dot_elements.forEach(element => {
                 element.classList.remove("selected")
             });
@@ -39,16 +38,16 @@
             
             setTimeout(scrollToPosition, 50);
           }
-          document.addEventListener('touchstart', function(e) {
-            // Get the dot content element and its parent dot container element
-            var dotContent = document.querySelector('.dot-content');
-            var dotContainer = dotContent.parentElement;
+        //   document.addEventListener('touchstart', function(e) {
+        //     // Get the dot content element and its parent dot container element
+        //     var dotContent = document.querySelector('.dot-content');
+        //     var dotContainer = dotContent.parentElement;
 
-            // If the touch event target is not a descendant of the dot container or the dot content element, hide the dot content
-            if (!dotContainer.contains(e.target) && !dotContent.contains(e.target)) {
-            dotContent.style.display = 'none';
-            }
-            });
+        //     // If the touch event target is not a descendant of the dot container or the dot content element, hide the dot content
+        //     if (!dotContainer.contains(e.target) && !dotContent.contains(e.target)) {
+        //     dotContent.style.display = 'none';
+        //     }
+        //     });
         </script>
     </head>    
   <body>
@@ -76,7 +75,8 @@
     <!-- <h3 id="what-i-do" style="text-align: center;">Lead <> Build <> Innovate</h3> -->
     <div class="divider">
       <hr class="divider-line">
-      <span class="divider-text"><h3 id="what-i-do">Lead <span style="font-size:medium; text-align: center;"> &#9826; </span> Build <span style="font-size:medium"> &#9826; </span> Innovate</h3></span>
+      <!-- <span class="divider-text"><h3 id="what-i-do">Lead <span style="font-size:medium; text-align: center;"> &#9826; </span> Build <span style="font-size:medium"> &#9826; </span> Innovate</h3></span> -->
+      <span class="divider-text"><h3 id="what-i-do">What I Do</h3></span>
       <hr class="divider-line">
     </div>
 
@@ -173,6 +173,9 @@
             </div>
         </div>
       </div>
+      <div class="label-build">BUILD</div>
+      <div class="label-lead">LEAD</div>
+      <div class="label-innovate">INNOVATE</div>
       <!-- <div class="arrow-right"></div> -->
     </div>
     

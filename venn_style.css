@@ -8,6 +8,14 @@
     vertical-align: baseline;
   }
 
+  :root {
+    --color-primary: #FDB813;
+    --color-secondary: #3A9FBF;
+    --color-tertiary:#E43F6F;
+    --color-accent: #EF8354;
+  }
+  
+
 .venn-container {
     width: 80vw;
     max-width: 800px;
@@ -44,19 +52,19 @@
   } */
   
   .circle-build {
-    background-color: #f44336; /* red */
+    background-color: var(--color-primary);
     top: 5%;
     left: 10%;
   }
   
   .circle-lead {
-    background-color: #4caf50; /* green */
+    background-color: var(--color-secondary);
     top: 35%;
     left: 25%;
   }
   
   .circle-innovate {
-    background-color: #2196f3; /* blue */
+    background-color: var(--color-tertiary); 
     top: 5%;
     right: 10%;
   }
@@ -74,6 +82,23 @@
     background-color: #fff;
     transition: transform 0.2s ease-out;
     z-index: 10;
+    box-shadow: 0 0 10px white;
+    /* animation-name: pulse;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; */
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   
@@ -145,6 +170,42 @@
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     border-left: 16px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .label-build {
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+  
+  .label-innovate {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    
+    color: var(--color-secondary);
+  }
+  
+  .label-lead {
+    position: absolute;
+    top: 15%;
+    right: 25%;
+    transform: translate(50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-tertiary);
+  }
+
+  .label-build, .label-innovate, .label-lead {
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 500;
   }
   
   @media screen and (min-width: 700px) {
