@@ -66,7 +66,7 @@ a {
   color: black;
 }
 
-.content {
+.landing {
   display: flex;
   flex-direction: row;
   height: 85vh;
@@ -287,12 +287,17 @@ video {
     background-color: #FF9800;
   }
 
+  .content-container {
+    position: relative;
+  }
+
   .content-window {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     max-width: 80%;
     margin: auto;
     display: none;
+    border: solid 1px black;
+    border-radius: 10px;
   }
   
   .divider {
@@ -371,9 +376,31 @@ video {
     width:40%
   }
 
+  .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    content: '';
+    cursor: pointer;
+    top: min(50vh,50%);
+  }
+  
+  .arrow-left {
+    left: 20px;
+    border-right: 10px solid black;
+  }
+  
+  .arrow-right {
+    right: 20px;
+    border-left: 10px solid black;
+  }
+  
+
   /* For mobile devices */
 @media only screen and (max-width: 700px) {
-  .content {
+  .landing {
     flex-direction: column-reverse;
     height: auto;
   }
@@ -386,7 +413,7 @@ video {
     padding-top: 20px;
   }
 
-  .about .content {
+  .about .landing {
     flex-direction: column;
     height: auto;
     padding-bottom: 50px;

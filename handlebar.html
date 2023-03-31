@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Will Langford is an engineer, technology leader, and entrepreneur. He gets excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.">
+    <title>Will Builds Things</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="venn_style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/vch1ekh.css">
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+    <script>
+        function scrollToPosition() {
+            var content_window = document.getElementById("content-window"); //what-i-do
+            var content_start = content_window.querySelector("zero-md");
+            content_start.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        }
+
+        function expandContent(mdPath, id = null) {
+            // show selected content
+            var content_window = document.getElementById("content-window");
+            content_window.style.display = "block";
+            content_window.innerHTML = "<zero-md src='content/docs/" + mdPath + "''></zero-md>";
+
+            document.getElementById("back-to-top").style.display = "flex"
+
+            const dot_elements = document.querySelectorAll('.dot-container');
+            const list_items = document.querySelectorAll('.dot-content-list-item');
+
+            dot_elements.forEach(element => {
+                element.classList.remove("selected");
+            });
+
+            list_items.forEach(element => {
+                element.classList.remove("selected");
+            });
+
+            if (id != null) {
+                let dot_element = document.getElementById("dot-"+id);
+                dot_element.classList.add("selected");
+
+                let corresponding_listitem = document.getElementById("listitem-"+id);
+                corresponding_listitem.classList.add("selected");
+            }
+
+            setTimeout(scrollToPosition, 50);
+        }
+
+        function getMaxIndex() {
+            let maxIndex = 0;
+            document.querySelectorAll('[id^="dot-"]').forEach(element => {
+                const index = parseInt(element.id.split("-")[1]);
+                if (index > maxIndex) {
+                    maxIndex = index;
+                }
+            });
+            return maxIndex;
+        }
+
+        function previous() {
+            let selected_element = document.querySelector('.dot-container.selected');
+            let selected_id = 0;
+
+            if (selected_element != null) {
+                selected_id = parseInt(selected_element.id.split("-")[1]);
+            } 
+
+            selected_id = selected_id - 1;
+            if (selected_id < 0) {
+                selected_id = getMaxIndex();
+            }
+
+            const dotElement = document.getElementById("dot-"+selected_id);
+            const onclickAttr = dotElement.getAttribute('onclick');
+            const contentRegex = /expandContent\('(.+?)'/;
+            const contentMatch = onclickAttr.match(contentRegex);
+            const contentValue = contentMatch[1];
+
+            expandContent(contentValue,selected_id);
+        }
+
+        function next() {
+            let selected_element = document.querySelector('.dot-container.selected');
+            let selected_id = -1;
+
+            if (selected_element != null) {
+                selected_id = parseInt(selected_element.id.split("-")[1]);
+            }
+
+            selected_id = selected_id + 1;
+            if (selected_id > getMaxIndex()) {
+                selected_id = 0;
+            }
+
+            const dotElement = document.getElementById("dot-"+selected_id);
+            const onclickAttr = dotElement.getAttribute('onclick');
+            const contentRegex = /expandContent\('(.+?)'/;
+            const contentMatch = onclickAttr.match(contentRegex);
+            const contentValue = contentMatch[1];
+
+            console.log(selected_id)
+
+            expandContent(contentValue,selected_id);
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="header-title">
+            <h1>WILL LANGFORD</h1>
+        </div>
+    </header>
+    <div class="landing">
+        <div class="text">
+            <h3>I am an engineer, technology leader, and entrepreneur. I get excited about manipulating atoms with bits.
+                Let's talk about digital fabrication, robotics, and bio-automation.
+                <br><br>
+                <a href="#what-i-do">Learn more about what I do</a>.
+                <br><br>
+            </h3>
+        </div>
+        <div class="video-container">
+            <video width="100%" height="auto" autoplay muted loop playsinline>
+                <source src="assets/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="divider">
+        <hr class="divider-line">
+        <span class="divider-text">
+            <h3 id="what-i-do">What I Do</h3>
+        </span>
+        <hr class="divider-line">
+    </div>
+
+    <div id="venn-container"></div>
+    <div class="content-container">
+        <div class="arrow arrow-left" onclick="previous()"></div>
+        <div class="arrow arrow-right" onclick="next()"></div>
+        <div id="content-window" class="content-window"></div>
+    </div>
+    
+
+    <div id="back-to-top" class="divider">
+        <hr class="divider-line">
+        <span class="divider-text">
+            <h4><a id="backlink" href="#what-i-do">Back to top</a></h4>
+        </span>
+        <hr class="divider-line">
+    </div>
+</body>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">
+            <p>© 2023 Will Builds Things. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script type="text/javascript" src="venn.js"></script>
+
+<script>
+
+    // Loop through the list items and add a mouseover event listener to each one
+    const listItems = document.querySelectorAll('.dot-content-list-item');
+    
+    listItems.forEach((item, index) => {
+        const dotContainer = document.querySelector('#dot-'+index);
+
+        item.addEventListener('mouseover', () => {
+            dotContainer.classList.add('active');
+            item.classList.add('active');
+
+            // const dot_elements = document.querySelectorAll('.dot');
+            // const list_items = document.querySelectorAll('.dot-content-list-item');
+
+            // dot_elements.forEach(element => {
+            //     element.classList.remove("selected");
+            // });
+
+            // list_items.forEach(element => {
+            //     element.classList.remove("selected");
+            // });
+        });
+
+        item.addEventListener('mouseout', () => {
+            dotContainer.classList.remove('active');
+            item.classList.remove('active');
+        });
+        
+        dotContainer.addEventListener('mouseover', () => {
+            item.classList.add('active');
+            dotContainer.classList.add('active');
+        });
+
+        dotContainer.addEventListener('mouseout', () => {
+            item.classList.remove('active');
+            dotContainer.classList.remove('active');
+        });
+    });
+
+</script>
+
+</html>
