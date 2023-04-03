@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-
 ### Makerbot Industries
 
 <a href="www.makerbot.com">Makerbot Industries</a> makes and sells low-cost 3D printers. I was their first intern (back in 2009) and worked with for them for three summers (from 2009 to 2011). It was a great experience to see how a company grows from three people to well over a hundred now.
@@ -41,8 +39,8 @@ I spent the summer of 2010 designing, testing, programming, and launching a new 
 
 Aside from just making really cool art and post-it note sketches...
 
-<div align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F4sRvTfr-ho" frameborder="0" allowfullscreen></iframe>
+<div class="image-row">
+<iframe src="https://www.youtube.com/embed/F4sRvTfr-ho" frameborder="0" allowfullscreen style="max-width:100%"></iframe>
 </div>
 
 <p>it can also draw resist on copper clad board which can then be etched to create funcitonal circuit boards.</p>

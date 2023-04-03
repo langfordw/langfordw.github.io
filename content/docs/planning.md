@@ -1,9 +1,10 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-<img src="content/planning.png" class="image-float-right">
-
 ### An Iterative and Collaborative Approach to Planning
 
 As we planned the remaining work in the feasibility stage of our product development process, we recognized the need to establish a clear plan for the remaining work and do so in a way that brought the team into the planning process. We took an approach very similar to the W-framework.
+
+<div class="image-row">
+<img src="content/planning.png" class="image-float-right">
+</div>
 
 - First, the leadership team took time to establish:
     - What are the remaining feasibility efforts

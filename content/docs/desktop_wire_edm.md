@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-
 ### Desktop Wire-EDM
 
 <div class="image-row"><img src="content/dwedm2_01.jpeg" style="max-width:80%"></div>
