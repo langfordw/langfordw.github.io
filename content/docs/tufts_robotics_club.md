@@ -42,7 +42,7 @@ We turned out to be really good at this and got first place on the Olympiad Exam
 In Winter 2010 I rallied members of my robotics club to design and build 3D printed sumobots with me. Over winter break I designed the main chassis of the robot and let club members design and 3D print their own front-scoops (the front section of the robot). In February we all got together and put the robots together. The Tufts Web Communications Blog wrote a <a href="http://enews.tufts.edu/stories/1642/2010/03/31/WillLangford">short article</a> about our mini-competition and made this video:
 
 <div class="image-row">
-    <iframe width="700" height="395" src="http://www.youtube.com/embed/Jp-x0tJwwCU" frameborder="0" allowfullscreen></iframe>
+    <iframe src="http://www.youtube.com/embed/Jp-x0tJwwCU" frameborder="0" allowfullscreen style="max-width:100%"></iframe>
 </div>
 
 The sumobots themselves are pretty simple. They've got two DC motors, an Arduino, some distance sensors, line sensors, and a custom designed robotics shield for the Arduino. You can download the 3D printed parts from <a href="http://www.thingiverse.com/thing:1548">Thingiverse</a>.

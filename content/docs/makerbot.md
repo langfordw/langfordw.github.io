@@ -39,8 +39,8 @@ I spent the summer of 2010 designing, testing, programming, and launching a new 
 
 Aside from just making really cool art and post-it note sketches...
 
-<div align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F4sRvTfr-ho" frameborder="0" allowfullscreen></iframe>
+<div class="image-row">
+<iframe src="https://www.youtube.com/embed/F4sRvTfr-ho" frameborder="0" allowfullscreen style="max-width:100%"></iframe>
 </div>
 
 <p>it can also draw resist on copper clad board which can then be etched to create funcitonal circuit boards.</p>
