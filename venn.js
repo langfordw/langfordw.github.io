@@ -19,7 +19,7 @@ const templateSource = `
       <div class="circle circle-innovate"></div>
     </div>
     {{#each dots}}
-    <div id="dot-{{@index}}" class="dot-container" style="top: {{top}}%; left: {{left}}%;" onclick="expandContent('{{content}}',{{@index}})">
+    <div id="dot-{{@index}}" class="dot-container" style="top: {{top}}%; left: {{left}}%;" onclick="handleContentDisplay('{{content}}',{{@index}})">
       <div class="dot"></div>
       <div class="dot-content">
         <h4>{{title}}</h4>
@@ -33,7 +33,7 @@ const templateSource = `
   </div>
   <div class="dot-content-list">
     {{#each dots}}
-    <div id="listitem-{{@index}}" class="dot-content-list-item" onclick="expandContent('{{content}}',{{@index}})">
+    <div id="listitem-{{@index}}" class="dot-content-list-item" onclick="handleContentDisplay('{{content}}',{{@index}})">
       <h4>{{title}}</h4>
     </div>
     {{/each}}

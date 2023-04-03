@@ -1,6 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-<img src="content/placeholder.jpeg" class="image-float-right">
-
 ### Rapid Task Force -- System Integration
 
 Bring-up and integration of a new prototype is always a challenge and often takes longer than is budgeted for. We experienced major challenges with the bring-up of one of our prototypes that dragged on. We new there was a serious problem.
@@ -9,7 +6,9 @@ To solve the problem we needed to create a sense of urgency and focus the team. 
 
 We convened daily standups to check in on progress, reveal any issues or blockers, and triage the work for the day. We set weekly goals with daily progress targets that we worked toward. This gave everyone a clear sense of how things were progressing.
 
-<img src="content/placeholder.jpeg" class="image-float-left">
+<div class="image-row">
+    <img src="content/placeholder.jpeg">
+</div>
 
 I joined the team “in the mud,” dropping a number of responsibilities to make this my primary focus. Together, we stamped out a series of complex system integration challenges spanning: electrical, material/chemistry, structural, electromechanical, and procedural (calibration). 
 

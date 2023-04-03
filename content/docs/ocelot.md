@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-
 ### Ocelot, 2014
 
 I took a bio-inspired robotics class taught by <a href="http://biomimetics.mit.edu/">Sangbae Kim</a>, and together fellow CBA'er <a href="http://www.mit.edu/~calisch/">Sam Calish</a>, we built Ocelot, a three degree-of-freedom bounding robot. By controlling the extension/contraction of the front and hind legs as well as the flexion of the spine, the robot can run at up to 1.5 bodylengths per second.

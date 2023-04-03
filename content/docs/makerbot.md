@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-
 ### Makerbot Industries
 
 <a href="www.makerbot.com">Makerbot Industries</a> makes and sells low-cost 3D printers. I was their first intern (back in 2009) and worked with for them for three summers (from 2009 to 2011). It was a great experience to see how a company grows from three people to well over a hundred now.

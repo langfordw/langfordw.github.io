@@ -19,14 +19,40 @@
         function scrollToPosition() {
             var content_window = document.getElementById("content-window"); //what-i-do
             var content_start = content_window.querySelector("zero-md");
-            content_start.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            content_start.scrollIntoView({ behavior:"instant", block: "nearest", inline: "nearest" });
         }
 
-        function expandContent(mdPath, id = null) {
+        function handleContentDisplay(mdPath, id = null) {
             // show selected content
             var content_window = document.getElementById("content-window");
             content_window.style.display = "block";
-            content_window.innerHTML = "<zero-md src='content/docs/" + mdPath + "''></zero-md>";
+            // content_window.innerHTML = "<zero-md src='content/docs/" + mdPath + "''><template data-merge='append'><link rel='stylesheet' type='text/css' href='../../style.css'></template></zero-md>";
+            content_window.innerHTML = "<zero-md no-shadow src='content/docs/" + mdPath + "''></zero-md>";
+            // content_window.innerHTML = "<zero-md src='content/docs/" + mdPath + "''>\
+            //     <template data-merge='append'>\
+            //         <style>\
+            //             .image-row {\
+            //                 display: flex;\
+            //                 justify-content: center;\
+            //                 align-items: center;\
+            //                 max-width: 100%;\
+            //                 height: auto;\
+            //                 padding-bottom: 10px;\
+            //             }\
+            //             \
+            //             .image-row img {\
+            //                 flex: 1;\
+            //                 max-width: 40%;\
+            //                 height: auto;\
+            //                 margin: 5px;\
+            //                 width: 100%;\
+            //                 height: 100%;\
+            //                 object-fit: contain;\
+            //                 border-radius: 5px;\
+            //             }\
+            //         </style>\
+            //     </template>\
+            // </zero-md>";
 
             document.getElementById("back-to-top").style.display = "flex"
 
@@ -63,50 +89,27 @@
             return maxIndex;
         }
 
-        function previous() {
-            let selected_element = document.querySelector('.dot-container.selected');
-            let selected_id = 0;
-
-            if (selected_element != null) {
-                selected_id = parseInt(selected_element.id.split("-")[1]);
-            } 
-
-            selected_id = selected_id - 1;
-            if (selected_id < 0) {
-                selected_id = getMaxIndex();
-            }
-
-            const dotElement = document.getElementById("dot-"+selected_id);
+        function changeContent(increment) {
+            const selectedElement = document.querySelector('.dot-container.selected');
+            let selectedId = selectedElement ? parseInt(selectedElement.id.split("-")[1]) : (increment === 1 ? -1 : 0);
+            selectedId = (selectedId + increment) % (getMaxIndex('[id^="dot-"]') + 1);
+            
+            if (selectedId < 0) selectedId = getMaxIndex();
+            if (selectedId > getMaxIndex) selectedId = 0;
+    
+            const dotElement = document.getElementById(`dot-${selectedId}`);
             const onclickAttr = dotElement.getAttribute('onclick');
-            const contentRegex = /expandContent\('(.+?)'/;
-            const contentMatch = onclickAttr.match(contentRegex);
-            const contentValue = contentMatch[1];
-
-            expandContent(contentValue,selected_id);
+            const contentValue = onclickAttr.match(/handleContentDisplay\('(.+?)'/)[1];
+    
+            handleContentDisplay(contentValue, selectedId);
         }
-
+    
+        function previous() {
+            changeContent(-1);
+        }
+    
         function next() {
-            let selected_element = document.querySelector('.dot-container.selected');
-            let selected_id = -1;
-
-            if (selected_element != null) {
-                selected_id = parseInt(selected_element.id.split("-")[1]);
-            }
-
-            selected_id = selected_id + 1;
-            if (selected_id > getMaxIndex()) {
-                selected_id = 0;
-            }
-
-            const dotElement = document.getElementById("dot-"+selected_id);
-            const onclickAttr = dotElement.getAttribute('onclick');
-            const contentRegex = /expandContent\('(.+?)'/;
-            const contentMatch = onclickAttr.match(contentRegex);
-            const contentValue = contentMatch[1];
-
-            console.log(selected_id)
-
-            expandContent(contentValue,selected_id);
+            changeContent(1);
         }
     </script>
 </head>
@@ -146,6 +149,9 @@
     <div class="content-container">
         <div class="arrow arrow-left" onclick="previous()"></div>
         <div class="arrow arrow-right" onclick="next()"></div>
+        <div id="content-window-prev" onclick="previous()" class="content-window prev"></div>
+        <div id="content-window-next" onclick="next()" class="content-window next"></div>
+        
         <div id="content-window" class="content-window"></div>
     </div>
     
@@ -181,17 +187,6 @@
         item.addEventListener('mouseover', () => {
             dotContainer.classList.add('active');
             item.classList.add('active');
-
-            // const dot_elements = document.querySelectorAll('.dot');
-            // const list_items = document.querySelectorAll('.dot-content-list-item');
-
-            // dot_elements.forEach(element => {
-            //     element.classList.remove("selected");
-            // });
-
-            // list_items.forEach(element => {
-            //     element.classList.remove("selected");
-            // });
         });
 
         item.addEventListener('mouseout', () => {

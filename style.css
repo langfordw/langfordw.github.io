@@ -71,6 +71,7 @@ a {
   flex-direction: row;
   height: 85vh;
   overflow: hidden;
+  /* margin: auto; */
 }
 
 .text {
@@ -288,17 +289,86 @@ video {
   }
 
   .content-container {
+    /* display: flex; */
     position: relative;
+    width: 100%;
+    height: 100%;
+    /* margin: 0 auto; */
+    overflow: hidden;
+  }
+
+  .content-wrapper {
+    /* width: 80%; */
+    /* height: 100%; */
+    /* display: flex; */
+    /* overflow: hidden; */
+    /* padding: 20px; */
+    /* margin: 0 auto; */
+    /* gap: 2em; */
+    /* width: 100%; */
+    /* height: 100%; */
   }
 
   .content-window {
+    /* display: flex; */
     padding: 20px;
-    max-width: 80%;
+    max-width: calc(80% - 42px);
     margin: auto;
     display: none;
     border: solid 1px black;
     border-radius: 10px;
+    /* transform: translateX(calc(-242px + 10%)); */
+    /* transform: translateX(calc(-90% - 2em)); */
+    /* transform: translateX(calc(-80% - 40px - 4em)); */
+    /* transform: translateX(calc(-80%-20px)); */
   }
+
+  .content-window.next, .content-window.prev {
+    display: block;
+    position: absolute;
+    margin: 0 0;
+    padding: 0;
+    width: 200px;
+    height: calc(100% - 2px);
+    top: 0;
+    cursor: pointer;
+    background: rgba(0,0,0,0);
+  }
+
+  .content-window.next {
+    right: calc(-200px + 10% - 1em);
+  }
+
+  .content-window.prev {
+    left: calc(-200px + 10% - 1em);
+  }
+
+  .content-window.prev:hover,.content-window.next:hover {
+    background: rgba(0,0,0,0.05);
+  }
+  /* .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    cursor: pointer;
+  }
+  
+  .arrow-left {
+    left: 0;
+    border-right: 20px solid black;
+  }
+  
+  .arrow-right {
+    right: 0;
+    border-left: 20px solid black;
+  }
+   */
+  
+  
   
   .divider {
     display: flex;
@@ -347,18 +417,19 @@ video {
     display: flex;
     justify-content: center; /* center the images horizontally */
     align-items: center; /* center the images vertically */
-    max-width: 100%; /* ensure the images fit within the parent container */
+    max-width: 80%; /* ensure the images fit within the parent container */
     height: auto; /* allow the height of the container to adjust based on the images */
     padding-bottom: 10px;
+    margin: 0 auto;
   }
   
   .image-row img {
     flex: 1; /* allow the images to fill the available space */
-    max-width: 40%; /* ensure that two images can fit side by side */
+    width: 40%; /* ensure that two images can fit side by side */
     height: auto; /* allow the height of the image to adjust while maintaining aspect ratio */
     margin: 5px; /* add some space between the images */
 
-    width: 100%;
+    /* width: 100%; */
     height: 100%; /* ensure the image fills the entire container */
     object-fit: contain; /* scale the image to fit within the container while maintaining aspect ratio */
     border-radius: 5px;
@@ -388,14 +459,15 @@ video {
   }
   
   .arrow-left {
-    left: 20px;
+    left: 2.5%;
     border-right: 10px solid black;
   }
   
   .arrow-right {
-    right: 20px;
+    right: 2.5%;
     border-left: 10px solid black;
   }
+
   
 
   /* For mobile devices */
@@ -445,7 +517,12 @@ video {
   }
 
   .image-row img {
-    max-width: 80%;
+    /* max-width: 80%; */
+    width: 80%;
+  }
+
+  .content-container {
+    margin-top: 20px;
   }
 }
   

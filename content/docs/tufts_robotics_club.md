@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../../style.css">
-
 ### Tufts Robotics Club
 
 #### Trinity Firefighting Competitions (2010-2012)
