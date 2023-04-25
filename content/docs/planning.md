@@ -1,9 +1,9 @@
 ### An Iterative and Collaborative Approach to Planning
 
-As we planned the remaining work in the feasibility stage of our product development process, we recognized the need to establish a clear plan for the remaining work and do so in a way that brought the team into the planning process. We took an approach very similar to the W-framework.
+As we planned the remaining work in the feasibility stage of our product development process, we recognized the need to establish a clear plan for the remaining work and do so in a way that brought the team into the planning process. We took an approach very similar to the [W-framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite).
 
 <div class="image-row">
-<img src="content/planning.png" class="image-float-right">
+    <img src="content/planning.png" style="max-width:60%">
 </div>
 
 - First, the leadership team took time to establish:
