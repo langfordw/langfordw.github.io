@@ -1,6 +1,6 @@
 ### Fablab Deployments
 
-Fablabs, or fabrication laboratories, are small-scale workshops that offer digital fabrication tools and resources for individuals to learn, innovate, and create. The concept of Fablabs originated at MIT's Center for Bits and Atoms, led by my advisor: Professor Neil Gershenfeld, with the goal of democratizing access to advanced manufacturing technologies and fostering a global network of innovation hubs.
+[Fablabs](https://www.fablabs.io/), or fabrication laboratories, are small-scale workshops that offer digital fabrication tools and resources for individuals to learn, innovate, and create. The concept of Fablabs originated at MIT's Center for Bits and Atoms, led by my advisor: Professor Neil Gershenfeld, with the goal of democratizing access to advanced manufacturing technologies and fostering a global network of innovation hubs.
 
 These labs are equipped with an array of cutting-edge tools such as 3D printers, CNC machines, laser cutters, and electronics workstations, enabling users to design and fabricate a wide range of projects. Fablabs have become a global phenomenon, with hundreds of locations worldwide, each fostering a unique community of makers, students, entrepreneurs, and researchers.
 
