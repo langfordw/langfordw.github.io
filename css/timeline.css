@@ -15,9 +15,9 @@
     position: absolute;
     bottom: 37px;
     left: -6%;
-    width: 17.5%;
-    height: 116px;
-    object-fit: cover;
+    width: 21%;
+    height: 139px;
+    object-fit: contain;
     object-position: center;
 }
 

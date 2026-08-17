@@ -103,6 +103,12 @@ a {
   margin-top: -120px;
 }
 
+@media (min-width: 1400px) {
+  .landing #timeline-container {
+    margin-top: -200px;
+  }
+}
+
 video {
   max-width: 100%;
   /* max-height: 60vh; */
