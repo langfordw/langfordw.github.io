@@ -17,6 +17,10 @@ That last part is probably what I enjoy most. An industrial 3D printer sits at t
 
 One example is Print Intelligence. I started exploring whether we could use data from the printer to recognize and respond to failures while a print was still running. What began as a small feasibility study became a six-month push from initial idea to a production feature enabled by default across the fleet. Along the way I worked on the business case, data collection and annotation, algorithm and system architecture, testing, tuning, and ultimately getting the feature released into the product.
 
+<div class="video-embed">
+	<iframe src="https://www.youtube.com/embed/CoPBrvdrces?start=66" title="Fuse X1: Formlabs&#39; LARGEST SLS 3D Printer Yet!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 A different part of the job is creating ways for the broader team to converge on a working product. I run our daily print-success triage, where engineers across disciplines work through issues from both our internal printers and beta customers, as well as a weekly program-wide review focused on the hardware risks most likely to prevent us from shipping. I also built the tooling we use to track part quality throughout development; a team of engineers, technicians, and product managers has now used it to assess more than 20,000 individual printed parts.
 
 I like operating at that boundary between architecture and debugging—keeping the entire product in view while still being willing to dig into the data, physics, software, or hardware when that's what it takes to move the machine forward. Fuse X1 has been an especially fun version of that problem: taking a very complicated system from a collection of ideas and prototypes toward something that can repeatedly make good parts in the real world.
