@@ -7,8 +7,9 @@
         content="Will Langford is a multi-disciplinary engineer, technology leader, and entrepreneur. He gets excited about manipulating atoms with bits. Let's talk about digital fabrication, robotics, and bio-automation.">
     <title>Will Builds Things</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=2">
     <link rel="stylesheet" type="text/css" href="css/venn_style.css">
+    <link rel="stylesheet" type="text/css" href="css/timeline.css?v=17">
     <link rel="stylesheet" href="https://use.typekit.net/vch1ekh.css">
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
@@ -26,7 +27,7 @@
             // show selected content
             var content_window = document.getElementById("content-window");
             content_window.style.display = "block";
-            content_window.innerHTML = "<zero-md no-shadow src='content/docs/" + mdPath + "''></zero-md>";
+            content_window.innerHTML = "<zero-md no-shadow src=\"content/docs/" + mdPath + "?v=" + Date.now() + "\"></zero-md>";
 
             document.getElementById("back-to-top").style.display = "flex"
 
@@ -122,7 +123,6 @@
             </video>
         </div>
         <div id="timeline-container">
-            <img src="content/timeline.svg">
         </div>
     </div>
 
@@ -164,6 +164,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script type="text/javascript" src="js/venn.js"></script>
+<script type="text/javascript" src="js/timeline.js?v=11"></script>
 
 <script>
 

@@ -1,5 +1,6 @@
 const data = { 
     dots: [
+    { top: 38, left: 54, content: 'fuse_x1.md', title: 'Formlabs Fuse X1', image: 'content/fusex1/fusex1.jpg' },
     { top: 20, left: 52, content: 'rtf.md', title: 'Rapid Task Force for System Integration', image: 'content/rtf/rtf_meeting.png' },
     { top: 25, left: 70, content: 'planning.md', title: 'An iterative and collaborative approach to planning', image: 'content/planning/planning.png' },
     { top: 50, left: 30, content: 'discrete_robotic_construction.md', title: 'Discrete Robotic Construction', image: 'content/discrete_robotic_construction/walker.gif' },
@@ -24,7 +25,7 @@ const templateSource = `
       <div class="dot"></div>
       <div class="dot-content">
         <h4>{{title}}</h4>
-        <img src="{{image}}">
+        {{#if image}}<img src="{{image}}">{{/if}}
       </div>
     </div>
     {{/each}}

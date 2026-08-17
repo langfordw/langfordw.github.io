@@ -99,6 +99,10 @@ a {
   /* max-height: 60%; */
 }
 
+.landing #timeline-container {
+  margin-top: -120px;
+}
+
 video {
   max-width: 100%;
   /* max-height: 60vh; */
@@ -476,24 +480,6 @@ video {
   .arrow-right {
     right: 2.5%;
     border-left: 10px solid black;
-  }
-
-  #timeline-container {
-    display: flex;
-    flex: 1 1 auto;
-    width: 100%;
-    /* max-width: 700px; */
-    /* margin: 0 auto; */
-    padding-bottom: 50px;
-    flex-basis: 80%;
-    align-items: center;
-    /* min-height: 20%; */
-    justify-content: center;
-  }
-
-  #timeline-container > img {
-    max-width: min(700px, 80%);
-    font-family: "acumin-pro", sans-serif;
   }
 
   /* .content-window.prev::before,
